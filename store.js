@@ -8,7 +8,7 @@
   document.documentElement.style.setProperty("--store-wallpaper-url","#000");
   let rows=[],categoryNames=[],selectedCategory="All Apps",categoriesExpanded=false,loadedLimit=20;
   const esc=v=>String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-  const shownCategory=value=>!value||legacyCategories.some(n=>n.toLowerCase()===String(value).toLowerCase())?notSpecified:value;
+  const shownCategory=value=>!value?notSpecified:value;
   function render(){
     const q=search.value.trim().toLowerCase();
     let filtered=rows.filter(a=>(selectedCategory==="All Apps"||selectedCategory==="Recently Added"||shownCategory(a.category)===selectedCategory)&&`${a.name} ${shownCategory(a.category)} ${a.description||""}`.toLowerCase().includes(q));
@@ -92,7 +92,7 @@
     if(appsError){status.textContent="Could not load apps: "+appsError.message;return;}
     rows=apps||[];
     const storedNames=!catError&&catData?catData.map(c=>c.name):[];
-    categoryNames=[...new Set(storedNames.filter(name=>name&&name.toLowerCase()!==notSpecified.toLowerCase()&&!legacyCategories.some(n=>n.toLowerCase()===name.toLowerCase())))].sort((a,b)=>a.localeCompare(b));
+    categoryNames=[...new Set(storedNames.filter(name=>name&&name.toLowerCase()!==notSpecified.toLowerCase()))].sort((a,b)=>a.localeCompare(b));
     // Apps without a category and apps left in the old built-in categories appear under Not Specified.
     if(!["All Apps","Recently Added",...categoryNames].includes(selectedCategory))selectedCategory="All Apps";
     status.textContent=rows.length?"Catalogue connected.":"Connected — no apps added yet.";render();

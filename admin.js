@@ -4,7 +4,7 @@
   const db=window.supabase.createClient(cfg.SUPABASE_URL,cfg.SUPABASE_ANON_KEY),$=id=>document.getElementById(id),bucket=cfg.STORAGE_BUCKET||"app-icons",legacyCategories=["Games","Music","Learning","Entertainment","Apps"],notSpecified="Not Specified";
   let categories=[],allApps=[];
   const esc=v=>String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-  const shownCategory=value=>!value||legacyCategories.some(n=>n.toLowerCase()===String(value).toLowerCase())?notSpecified:value;
+  const shownCategory=value=>!value?notSpecified:value;
   function msg(t){status.textContent=t;}function signed(on){loginPanel.classList.toggle("hidden",on);manager.classList.toggle("hidden",!on);}
   function showAdminSection(which){["apps","categories"].forEach(name=>{const active=name===which,section=$(name+"Section"),tab=$(name+"Tab");section.classList.toggle("hidden",!active);tab.classList.toggle("primary",active);tab.classList.toggle("secondary",!active);tab.setAttribute("aria-selected",String(active));});}
   $("appsTab").addEventListener("click",()=>showAdminSection("apps"));$("categoriesTab").addEventListener("click",()=>showAdminSection("categories"));
@@ -20,7 +20,7 @@
   async function loadCategories(){
     const {data,error}=await db.from("store_categories").select("id,name").order("name");
     if(error){categories=[];renderCategoryOptions();renderCategoryList();msg("Category table unavailable: "+error.message);return;}
-    categories=(data||[]).filter(c=>c.name&&c.name.toLowerCase()!==notSpecified.toLowerCase()&&!legacyCategories.some(n=>n.toLowerCase()===c.name.toLowerCase()));
+    categories=(data||[]).filter(c=>c.name&&c.name.toLowerCase()!==notSpecified.toLowerCase());
     categories.sort((a,b)=>a.name.localeCompare(b.name));renderCategoryOptions($("category").value||notSpecified);renderCategoryList();
   }
   function clearCategoryForm(){$("categoryForm").reset();$("categoryOriginalName").value="";$("categorySubmit").textContent="Add category";}
