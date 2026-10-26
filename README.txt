@@ -1,0 +1,1 @@
+Akarsh ModStore performance update\n\nReplace only index.html and admin.html in your GitHub repository with these files. Keep store.js, style.css, config.js, and admin.js unchanged. Commit the changes, then refresh the live site.\n\nThis reduces backdrop blur and shadows on mobile while retaining the frosted-glass look. Prepared files are not published automatically.\n
