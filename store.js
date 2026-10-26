@@ -94,7 +94,6 @@
     const storedNames=!catError&&catData?catData.map(c=>c.name):[];
     categoryNames=[...new Set(storedNames.filter(name=>name&&name.toLowerCase()!==notSpecified.toLowerCase()&&!legacyCategories.some(n=>n.toLowerCase()===name.toLowerCase())))].sort((a,b)=>a.localeCompare(b));
     // Apps without a category and apps left in the old built-in categories appear under Not Specified.
-    if(rows.some(a=>shownCategory(a.category)===notSpecified))categoryNames.push(notSpecified);
     if(!["All Apps","Recently Added",...categoryNames].includes(selectedCategory))selectedCategory="All Apps";
     status.textContent=rows.length?"Catalogue connected.":"Connected — no apps added yet.";render();
   }
