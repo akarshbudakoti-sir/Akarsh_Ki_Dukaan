@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#000"><title>Admin · Akarsh Ki Dukaan</title><link rel="stylesheet" href="style.css"></head>
+<body><header class="topbar"><a class="brand" href="./"><span class="brand-mark">A</span><span>Akarsh Ki Dukaan, Lelo Apna Samaan</span></a><div class="topbar-actions"><a class="refresh-link" href="admin.html" aria-label="Refresh admin panel" title="Refresh"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 7v5h-5"/><path d="M4 17v-5h5"/><path d="M5.6 9A7 7 0 0 1 17.3 6.3L20 12"/><path d="M4 12l2.7 5.7A7 7 0 0 0 18.4 15"/></svg></a><a class="admin-link" href="./">View store</a></div></header>
+<main class="wrap" style="max-width:760px"><section class="intro"><p class="eyebrow">STORE MANAGEMENT</p><h1>Admin<span>.</span></h1><p>Sign in to manage apps and categories.</p></section><div id="adminStatus" class="status">Loading…</div>
+<section id="loginPanel" class="panel"><h2>Admin login</h2><form id="loginForm"><label>Email<input id="email" type="email" autocomplete="username" required></label><label>Password<input id="password" type="password" autocomplete="current-password" required></label><button class="primary" type="submit">Sign in</button></form></section>
+<section id="manager" class="hidden">
+<div class="section-head admin-workspace-head"><h2>Admin workspace</h2><button id="logout" class="secondary" type="button">Sign out</button></div>
+<div class="admin-section-picker" role="tablist" aria-label="Admin sections">
+<button class="primary admin-tab" id="appsTab" type="button" role="tab" aria-selected="true" aria-controls="appsSection">Add / Edit Apps</button>
+<button class="secondary admin-tab" id="categoriesTab" type="button" role="tab" aria-selected="false" aria-controls="categoriesSection">Manage Categories</button>
+<button class="secondary admin-tab" id="wallpaperTab" type="button" role="tab" aria-selected="false" aria-controls="wallpaperSection">Manage Wallpaper</button>
+</div>
+<section id="appsSection" class="admin-section" role="tabpanel" aria-labelledby="appsTab">
+<div class="panel"><div class="section-head"><h2 id="formTitle">Add an app</h2></div>
+<form id="appForm"><input id="appId" type="hidden"><label>App name<input id="name" required maxlength="100"></label><div class="form-row"><label>Category<select id="category" required></select></label><label>Version<input id="version" placeholder="Unknown"></label></div>
+<div class="form-row"><label>File size<input id="size" placeholder="27.1 MB"></label><label>Icon URL (optional)<input id="iconUrl" type="url" placeholder="https://..."></label></div>
+<label>Upload app image<input id="iconFile" type="file" accept="image/*"><small>Choose an image from your phone (max 2 MB).</small></label><img id="imagePreview" class="upload-preview hidden" alt="Selected icon preview"><label>Description<textarea id="description" rows="3"></textarea></label><label>Download URL<input id="downloadUrl" type="url" required placeholder="https://..."></label><div class="form-row"><button class="primary" type="submit">Save app</button><button class="secondary" id="cancelEdit" type="button">Clear form</button></div></form></div>
+<div class="section-head"><h2>Current listings</h2><span id="adminCount"></span></div><label class="admin-search-label" for="appSearch">Search listed apps</label><input id="appSearch" type="search" placeholder="Search by app name, category, version…" autocomplete="off" aria-label="Search listed apps"><div id="adminApps" class="admin-list"></div>
+</section>
+<section id="categoriesSection" class="admin-section hidden" role="tabpanel" aria-labelledby="categoriesTab">
+<div class="panel"><div class="section-head"><h2>Manage Categories</h2></div><p class="meta">Add, rename, or delete categories. Changes update the main store. Apps in a deleted category move to “Apps”.</p>
+<form id="categoryForm"><label>Category name<input id="categoryName" maxlength="40" required placeholder="e.g. Anime"></label><input id="categoryOriginalName" type="hidden"><div class="form-row"><button class="primary" id="categorySubmit" type="submit">Add category</button><button class="secondary" id="categoryCancel" type="button">Clear</button></div></form><div id="categoryList" class="admin-list"></div></div>
+</section>
+<section id="wallpaperSection" class="admin-section hidden" role="tabpanel" aria-labelledby="wallpaperTab">
+<div class="panel"><div class="section-head"><h2>Manage Wallpaper</h2></div>
+<p class="meta">Upload a background image for the public store. Visitors will see the saved wallpaper automatically.</p>
+<label>Choose wallpaper (JPG, PNG, or WebP; max 8 MB)<input id="wallpaperFile" type="file" accept="image/jpeg,image/png,image/webp"></label>
+<img id="wallpaperPreview" class="upload-preview hidden" alt="Wallpaper preview" style="width:100%;max-height:360px;object-fit:cover;border-radius:12px">
+<div class="form-row" style="margin-top:14px"><button class="primary" id="saveWallpaper" type="button">Upload and save wallpaper</button><button class="secondary" id="removeWallpaper" type="button">Remove wallpaper</button></div>
+<p id="wallpaperStatus" class="meta" aria-live="polite">Loading current wallpaper…</p>
+</div>
+</section>
+</section></main>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="config.js"></script><script src="admin.js"></script></body></html>
