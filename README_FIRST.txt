@@ -1,19 +1,18 @@
-AKARSH MODSTORE — TARGETED SOURCE PATCH
+AKARSH MODSTORE — CATEGORY CLEANUP
 
-Replace ONLY these four files in your GitHub repository root:
+Upload these 4 files to the ROOT of your GitHub repository, replacing files with the same names:
 - store.js
-- style.css
-- admin.html
 - admin.js
+- admin.html
+- style.css
 
-Do NOT replace index.html or config.js. The Supabase app catalogue and app-icons bucket are not changed. Wallpaper UI and wallpaper bucket code are removed from the admin panel.
+Do NOT replace config.js, index.html, or change any Supabase settings.
 
-Features:
-1. Category More / Show less toggle; compact mode shows at most two rows.
-2. Load 20 apps initially, then 20 more per tap; displays loaded/total count.
-3. Wallpaper tab and wallpaper JS removed.
+Changes:
+1. Removes the built-in Games, Music, Learning, Entertainment, and Apps categories from the category selector/list.
+2. Uses “Not Specified” for new apps and for apps currently assigned to those old built-in category names.
+3. Keeps the existing Manage Categories section so you can add, rename, and delete your own categories.
+4. Fixes home-screen More / Show less: collapsed categories are limited to two rows and the More button is kept visible; expanded mode shows all categories.
+5. When a custom category is deleted, its apps are moved to “Not Specified”.
 
-After committing, wait for GitHub Pages deployment, then open:
-https://akarshbudakoti-sir.github.io/Akarsh_Ki_Dukaan/?v=1001
-
-If you use GitHub mobile, open each file, select Edit, replace its entire contents with the matching file from this ZIP, then commit. Back up the current files first.
+After upload, commit the changes and refresh the site. If the browser keeps old files, try an incognito/private tab.

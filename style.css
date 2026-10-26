@@ -13,5 +13,8 @@
 .app-details-stat{padding:5px 8px;border:1px solid #333;border-radius:8px;background:#111}
 .app-details-section{margin-top:16px;padding:16px;border:1px solid #333;border-radius:14px;background:#090909;white-space:pre-line}
 .app-details-download{display:block;text-align:center;margin-top:20px;padding:13px;border-radius:12px;background:#eee;color:#111;font-weight:700}
-
+.load-more-row{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;margin:22px 0 8px}
+.load-count{font-size:13px;color:#aaa}
+.chips [hidden]{display:none!important}
+.chip-more{white-space:nowrap}
 html,body{background:#000!important}body::before,body::after{display:none!important}*{-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
