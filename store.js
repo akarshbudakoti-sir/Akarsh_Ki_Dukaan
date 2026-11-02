@@ -19,7 +19,7 @@
     grid.innerHTML=shown.map(a=>`<article class="app-card" role="button" tabindex="0" data-app-id="${esc(a.id)}" aria-label="View details for ${esc(a.name)}"><div class="app-icon">${a.icon_url?`<img src="${esc(a.icon_url)}" alt="" onerror="this.style.display='none'">`:esc((a.name||"A").slice(0,2).toUpperCase())}</div><span class="tag">${esc(shownCategory(a.category))}</span><h3>${esc(a.name)}</h3><p>${esc(a.description||"Tap to view app details.")}</p><div class="meta">${esc(a.version||"Unknown")} · ${esc(a.size||"Size unknown")}</div></article>`).join("")||"<p>No apps found in this section.</p>";
     let pager=document.getElementById("loadMoreApps");
     if(!pager){pager=document.createElement("div");pager.id="loadMoreApps";pager.className="load-more-row";grid.insertAdjacentElement("afterend",pager);}
-    pager.innerHTML=`<span class="load-count">${shown.length} of ${total} apps loaded</span>${selectedCategory!=="Recently Added"&&shown.length<total?'<button type="button" class="chip" id="loadMoreButton">Load 20 more</button>':""}`;
+    pager.innerHTML=`<span class="load-count">${shown.length} of ${total} apps loaded</span>${selectedCategory!=="Recently Added"&&shown.length<total?'<button type="button" class="chip" id="loadMoreButton">Load more</button>':""}`;
     const loadBtn=document.getElementById("loadMoreButton");
     if(loadBtn)loadBtn.addEventListener("click",()=>{loadedLimit+=20;render();});
     grid.querySelectorAll("[data-app-id]").forEach(card=>{
@@ -38,16 +38,11 @@
       more.hidden=false;
       more.textContent="More ⌄";
       if(categoriesExpanded){more.textContent="Show less ⌃";return;}
-      // Measure rows while all category chips are visible.
       const rowTops=()=>[...new Set(chips.filter(chip=>!chip.hidden).map(chip=>chip.offsetTop))].sort((a,b)=>a-b);
       let tops=rowTops();
-      if(tops.length<=2){
-        more.hidden=true;
-        return;
-      }
+      if(tops.length<=2){more.hidden=true;return;}
       const secondRowTop=tops[1];
       chips.forEach(chip=>{if(chip.offsetTop>secondRowTop)chip.hidden=true;});
-      // Reserve space for the More button in the second row by hiding trailing chips as needed.
       let visible=chips.filter(chip=>!chip.hidden);
       while(more.offsetTop>secondRowTop && visible.length){
         const last=visible.pop();
@@ -93,7 +88,6 @@
     rows=apps||[];
     const storedNames=!catError&&catData?catData.map(c=>c.name):[];
     categoryNames=[...new Set(storedNames.filter(name=>name&&name.toLowerCase()!==notSpecified.toLowerCase()))].sort((a,b)=>a.localeCompare(b));
-    // Apps without a category and apps left in the old built-in categories appear under Not Specified.
     if(!["All Apps","Recently Added",...categoryNames].includes(selectedCategory))selectedCategory="All Apps";
     status.textContent=rows.length?"Catalogue connected.":"Connected — no apps added yet.";render();
   }
