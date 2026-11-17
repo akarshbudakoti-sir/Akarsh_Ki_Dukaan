@@ -1,0 +1,14 @@
+/* App-only look (Update-2.0 test app). Loaded after the site's style.css. */
+@font-face{font-family:"ModStore Serif";src:url("fonts/SourceSerif4.woff2") format("woff2");font-weight:200 900;font-style:normal;font-display:swap}
+html,body,button,input,select,textarea{font-family:"ModStore Serif",Georgia,"Times New Roman",serif!important}
+
+/* Frosted liquid glass */
+.topbar,.app-card,.search,.status,.chip,.panel,.admin-link,.app-details-top,.app-details-back,.app-details-hero,.app-details-section,.app-details-stat,.load-more-row .chip,input,select,textarea,button.secondary{
+  background:linear-gradient(135deg,rgba(255,255,255,.17),rgba(255,255,255,.05))!important;
+  -webkit-backdrop-filter:blur(22px) saturate(165%)!important;backdrop-filter:blur(22px) saturate(165%)!important;
+  border:1px solid rgba(255,255,255,.22)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.38),inset 0 -1px 0 rgba(255,255,255,.07),0 10px 32px rgba(0,0,0,.38)!important}
+.topbar{border-radius:0!important;border-width:0 0 1px 0!important}
+.chip.selected{background:rgba(255,255,255,.88)!important;color:#111!important}
+.app-details-screen{background:rgba(0,0,0,.42)!important;-webkit-backdrop-filter:blur(30px) saturate(150%)!important;backdrop-filter:blur(30px) saturate(150%)!important}
+.app-details-download{background:rgba(255,255,255,.9)!important;color:#111!important}
