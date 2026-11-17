@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <uses-permission android:name="android.permission.INTERNET" />
     <application
-        android:icon="@drawable/ic_launcher"
-        android:label="Akarsh ModStore"
+        android:icon="@drawable/ic_modstore"
+        android:label="ModStore"
         android:allowBackup="false"
         android:usesCleartextTraffic="false"
         android:theme="@android:style/Theme.Material.NoActionBar">
