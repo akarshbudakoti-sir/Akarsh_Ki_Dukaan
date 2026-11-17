@@ -1,0 +1,5 @@
+/* Store wallpaper. Not loaded on the admin page. */
+html{background:#000!important}
+body{background:transparent!important}
+body::before{content:""!important;display:block!important;position:fixed;inset:0;z-index:-1;
+  background:linear-gradient(rgba(0,0,0,.18),rgba(0,0,0,.45)),url("wallpaper.jpg") center/cover no-repeat}
