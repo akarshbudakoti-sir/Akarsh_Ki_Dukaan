@@ -62,7 +62,11 @@
   let detailsHistoryOpen=false;
   function removeDetails(){const screen=document.getElementById("appDetailsScreen");if(screen)screen.remove();document.body.style.overflow="";}
   function closeDetails(){if(detailsHistoryOpen)history.back();else removeDetails();}
-  window.addEventListener("popstate",()=>{if(document.getElementById("appDetailsScreen"))removeDetails();detailsHistoryOpen=false;});
+  window.addEventListener("popstate",()=>{
+    if(document.getElementById("appDetailsScreen")){removeDetails();detailsHistoryOpen=false;return;}
+    if(document.body.classList.contains("search-mode")){searchHistoryOpen=false;search.value="";search.blur();restoreBrowsing();return;}
+    detailsHistoryOpen=false;
+  });
   function openAppDetails(app){
     if(document.getElementById("appDetailsScreen"))removeDetails();
     if(!detailsHistoryOpen){history.pushState({appDetails:true},"",window.location.href);detailsHistoryOpen=true;}
@@ -83,9 +87,10 @@
   search.addEventListener("input",()=>{loadedLimit=20;render();});
   search.setAttribute("type","search");search.setAttribute("enterkeyhint","search");search.setAttribute("autocomplete","off");
   document.querySelector("label.search").insertAdjacentHTML("afterend",'<p id="searchInfo" class="search-info"></p>');
-  let prevCategory="All Apps";
-  const enterSearch=()=>{if(document.body.classList.contains("search-mode"))return;prevCategory=selectedCategory;selectedCategory="All Apps";loadedLimit=20;document.body.classList.add("search-mode");window.scrollTo(0,0);render();};
-  const exitSearch=()=>{if(search.value.trim()||!document.body.classList.contains("search-mode"))return;document.body.classList.remove("search-mode","has-query");selectedCategory=prevCategory;loadedLimit=20;render();};
+  let prevCategory="All Apps",searchHistoryOpen=false;
+  const restoreBrowsing=()=>{document.body.classList.remove("search-mode","has-query");selectedCategory=prevCategory;loadedLimit=20;render();};
+  const enterSearch=()=>{if(document.body.classList.contains("search-mode"))return;prevCategory=selectedCategory;selectedCategory="All Apps";loadedLimit=20;document.body.classList.add("search-mode");window.scrollTo(0,0);if(!searchHistoryOpen){history.pushState({storeSearch:true},"",window.location.href);searchHistoryOpen=true;}render();};
+  const exitSearch=()=>{if(search.value.trim()||!document.body.classList.contains("search-mode"))return;restoreBrowsing();if(searchHistoryOpen){searchHistoryOpen=false;history.back();}};
   search.addEventListener("focus",enterSearch);
   search.addEventListener("blur",exitSearch);
   search.addEventListener("input",()=>{if(!search.value.trim()&&document.activeElement!==search)exitSearch();});
