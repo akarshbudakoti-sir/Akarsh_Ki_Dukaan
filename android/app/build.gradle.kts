@@ -28,8 +28,8 @@ android {
         applicationId = "com.akarsh.modstore.test"
         minSdk = 24
         targetSdk = 34
-        versionCode = 2
-        versionName = "2.1.0-test"
+        versionCode = 3
+        versionName = "2.1.1-test"
     }
     buildTypes {
         // Test build: signed with the standard Android debug key.
