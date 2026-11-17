@@ -39,3 +39,12 @@ input,select,textarea,.panel,.admin-link{box-shadow:inset 0 1px 0 rgba(255,255,2
 .section-head{justify-content:flex-start!important;gap:12px}
 .section-head #count{font-size:13px;color:#fff;padding:3px 10px;border-radius:999px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.22)}
 .section-head #count:empty{display:none}
+
+/* Search mode: only header, search box and matching apps. */
+body.search-mode .intro,body.search-mode #status,body.search-mode #categories,body.search-mode .section-head{display:none!important}
+body.search-mode .search{margin-top:20px}
+.search-info{display:none;margin:14px 4px;font-size:14px;color:rgba(255,255,255,.85);text-shadow:0 1px 2px rgba(0,0,0,.7)}
+body.search-mode .search-info{display:block}
+body.search-mode:not(.has-query) .search-info{text-align:center;margin-top:28px}
+body.search-mode:not(.has-query) #apps,body.search-mode:not(.has-query) #loadMoreApps{display:none}
+.search input[type=search]::-webkit-search-cancel-button{-webkit-appearance:none;appearance:none}
