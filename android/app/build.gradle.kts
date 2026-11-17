@@ -4,6 +4,7 @@ plugins { id("com.android.application") }
 // shows whatever design is on this branch. No secrets live in these files.
 val siteAssets = layout.buildDirectory.dir("generated/siteAssets")
 val copySite = tasks.register<Copy>("copySiteAssets") {
+    filteringCharset = "UTF-8"
     // Site files from the repo root. The app look (font, glass, wallpaper) is
     // added here from src/overlay: app.css on every page, wallpaper.css on the
     // store page only (not admin).
