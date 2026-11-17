@@ -12,7 +12,7 @@ App look (app/src/overlay, injected at build time):
 - wallpaper.css + wallpaper.jpg: store-page background only. It is not linked
   from admin.html, so the admin page keeps its plain background.
 - Launcher icon: app/src/main/res/drawable-nodpi/ic_modstore.png.
-- App label is "ModStore" (versionName 2.1.0-test, versionCode 2).
+- App label is "ModStore" (versionName 2.1.1-test, versionCode 3).
 
 Safety: no JavaScript bridge is exposed. Only the app's own bundled origin
 stays inside the app; every other link (MediaFire downloads etc.) opens in the
