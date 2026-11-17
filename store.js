@@ -15,7 +15,7 @@
     if(selectedCategory==="Recently Added")filtered=filtered.slice(0,12);
     const total=filtered.length, shown=selectedCategory==="Recently Added"?filtered:filtered.slice(0,loadedLimit);
     document.getElementById("sectionTitle").textContent=selectedCategory;
-    document.getElementById("count").textContent=`${total} apps`;
+
     grid.innerHTML=shown.map(a=>`<article class="app-card" role="button" tabindex="0" data-app-id="${esc(a.id)}" aria-label="View details for ${esc(a.name)}"><div class="app-icon">${a.icon_url?`<img src="${esc(a.icon_url)}" alt="" onerror="this.style.display='none'">`:esc((a.name||"A").slice(0,2).toUpperCase())}</div><span class="tag">${esc(shownCategory(a.category))}</span><h3>${esc(a.name)}</h3><p>${esc(a.description||"Tap to view app details.")}</p><div class="meta">${esc(a.version||"Unknown")} · ${esc(a.size||"Size unknown")}</div></article>`).join("")||"<p>No apps found in this section.</p>";
     let pager=document.getElementById("loadMoreApps");
     if(!pager){pager=document.createElement("div");pager.id="loadMoreApps";pager.className="load-more-row";grid.insertAdjacentElement("afterend",pager);}
