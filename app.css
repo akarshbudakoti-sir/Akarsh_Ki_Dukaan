@@ -23,3 +23,7 @@ html,body,button,input,select,textarea{font-family:"ModStore Serif",Georgia,"Tim
 .app-card p,.app-card .meta,.intro>p:not(.eyebrow){color:rgba(255,255,255,.88)!important;text-shadow:0 1px 2px rgba(0,0,0,.7)}
 /* Performance: promote the fixed wallpaper to its own layer so scrolling does not repaint it. */
 body::before{transform:translateZ(0)}
+
+/* Admin lag fix: no live backdrop blur on form controls, buttons or admin chrome (only fixed topbar/search/details keep it). Frosted look stays via gradient/border. */
+input,select,textarea,button.secondary,.admin-link,.app-details-top,.app-details-back,.app-details-hero{backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+input,select,textarea,.panel,.admin-link{box-shadow:inset 0 1px 0 rgba(255,255,255,.3)!important}
