@@ -17,3 +17,5 @@ html,body,button,input,select,textarea{font-family:"ModStore Serif",Georgia,"Tim
 .search input{background:transparent!important;border:0!important;box-shadow:none!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;color:#fff!important}
 .search input::placeholder{color:rgba(255,255,255,.8)!important;opacity:1}
 .search>span{font-size:0!important}.search>span::after{content:"\2315";font-family:Arial,sans-serif;font-size:25px;color:#fff}
+/* Strong contrast above the colored wallpaper. */
+.app-card p,.app-card .meta,.intro>p:not(.eyebrow){color:rgba(255,255,255,.88)!important;text-shadow:0 1px 2px rgba(0,0,0,.7)}
