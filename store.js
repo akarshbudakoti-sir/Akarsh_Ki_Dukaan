@@ -13,6 +13,7 @@
     const q=search.value.trim().toLowerCase();
     let filtered=rows.filter(a=>(selectedCategory==="All Apps"||selectedCategory==="Recently Added"||shownCategory(a.category)===selectedCategory)&&`${a.name} ${shownCategory(a.category)} ${a.description||""}`.toLowerCase().includes(q));
     if(selectedCategory==="Recently Added")filtered=filtered.slice(0,12);
+    if(document.body.classList.contains("search-mode")){const qi=document.getElementById("searchInfo");if(qi)qi.textContent=q?filtered.length+" result"+(filtered.length===1?"":"s"):"Type to search the store.";document.body.classList.toggle("has-query",!!q);}
     const total=filtered.length, shown=selectedCategory==="Recently Added"?filtered:filtered.slice(0,loadedLimit);
     document.getElementById("sectionTitle").textContent=selectedCategory;
     const catTotal=rows.filter(a=>selectedCategory==="All Apps"||selectedCategory==="Recently Added"||shownCategory(a.category)===selectedCategory).length;
@@ -80,6 +81,16 @@
     if(b){selectedCategory=b.dataset.cat;loadedLimit=20;render();}
   });
   search.addEventListener("input",()=>{loadedLimit=20;render();});
+  search.setAttribute("type","search");search.setAttribute("enterkeyhint","search");search.setAttribute("autocomplete","off");
+  document.querySelector("label.search").insertAdjacentHTML("afterend",'<p id="searchInfo" class="search-info"></p>');
+  let prevCategory="All Apps";
+  const enterSearch=()=>{if(document.body.classList.contains("search-mode"))return;prevCategory=selectedCategory;selectedCategory="All Apps";loadedLimit=20;document.body.classList.add("search-mode");window.scrollTo(0,0);render();};
+  const exitSearch=()=>{if(search.value.trim()||!document.body.classList.contains("search-mode"))return;document.body.classList.remove("search-mode","has-query");selectedCategory=prevCategory;loadedLimit=20;render();};
+  search.addEventListener("focus",enterSearch);
+  search.addEventListener("blur",exitSearch);
+  search.addEventListener("input",()=>{if(!search.value.trim()&&document.activeElement!==search)exitSearch();});
+  search.addEventListener("keydown",e=>{if(e.key==="Enter"||e.keyCode===13){e.preventDefault();search.blur();}});
+  search.addEventListener("search",()=>{if(document.activeElement===search&&search.value.trim())search.blur();});
   window.addEventListener("resize",()=>{if(!categoriesExpanded)requestAnimationFrame(()=>{const more=cats.querySelector("[data-more]");if(more)more.click();if(more)more.click();});});
   async function load(){
     status.textContent="Loading apps…";
