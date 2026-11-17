@@ -15,6 +15,9 @@
     if(selectedCategory==="Recently Added")filtered=filtered.slice(0,12);
     const total=filtered.length, shown=selectedCategory==="Recently Added"?filtered:filtered.slice(0,loadedLimit);
     document.getElementById("sectionTitle").textContent=selectedCategory;
+    const catTotal=rows.filter(a=>selectedCategory==="All Apps"||selectedCategory==="Recently Added"||shownCategory(a.category)===selectedCategory).length;
+    const catShown=selectedCategory==="Recently Added"?Math.min(12,catTotal):catTotal;
+    document.getElementById("count").textContent=catShown+(catShown===1?" app":" apps");
 
     grid.innerHTML=shown.map(a=>`<article class="app-card" role="button" tabindex="0" data-app-id="${esc(a.id)}" aria-label="View details for ${esc(a.name)}"><div class="app-icon">${a.icon_url?`<img src="${esc(a.icon_url)}" alt="" onerror="this.style.display='none'">`:esc((a.name||"A").slice(0,2).toUpperCase())}</div><span class="tag">${esc(shownCategory(a.category))}</span><h3>${esc(a.name)}</h3><p>${esc(a.description||"Tap to view app details.")}</p><div class="meta">${esc(a.version||"Unknown")} · ${esc(a.size||"Size unknown")}</div></article>`).join("")||"<p>No apps found in this section.</p>";
     let pager=document.getElementById("loadMoreApps");
@@ -89,7 +92,7 @@
     const storedNames=!catError&&catData?catData.map(c=>c.name):[];
     categoryNames=[...new Set(storedNames.filter(name=>name&&name.toLowerCase()!==notSpecified.toLowerCase()))].sort((a,b)=>a.localeCompare(b));
     if(!["All Apps","Recently Added",...categoryNames].includes(selectedCategory))selectedCategory="All Apps";
-    status.textContent=rows.length?"Catalogue connected.":"Connected — no apps added yet.";render();
+    if(rows.length){status.innerHTML='<span class="status-icon" aria-hidden="true">\u2713</span><span class="status-text"><strong>Catalogue Connected</strong><small>Synced \u2022 '+rows.length+' app'+(rows.length===1?'':'s')+' available</small></span>';status.classList.add("status-ok");}else{status.textContent="Connected — no apps added yet.";}render();
   }
   load().catch(error=>{status.textContent="Catalogue error: "+(error?.message||"Could not connect.");console.error(error);});
 })();
