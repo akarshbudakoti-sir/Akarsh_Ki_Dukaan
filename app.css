@@ -48,3 +48,8 @@ body.search-mode .search-info{display:block}
 body.search-mode:not(.has-query) .search-info{text-align:center;margin-top:28px}
 body.search-mode:not(.has-query) #apps,body.search-mode:not(.has-query) #loadMoreApps{display:none}
 .search input[type=search]::-webkit-search-cancel-button{-webkit-appearance:none;appearance:none}
+
+/* Admin tabs: keep Build App / Manage Category / Listing on one line, even on narrow screens. */
+.admin-section-picker{display:flex;flex-wrap:nowrap;gap:6px;align-items:stretch}
+.admin-section-picker .admin-tab{flex:1 1 0;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding-left:6px!important;padding-right:6px!important;font-size:13px}
+@media(max-width:520px){.admin-section-picker .admin-tab{font-size:12px;padding-left:4px!important;padding-right:4px!important}}
