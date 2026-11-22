@@ -8,7 +8,8 @@
   document.documentElement.style.setProperty("--store-wallpaper-url","#000");
   let rows=[],categoryNames=[],selectedCategory="All Apps",categoriesExpanded=false,loadedLimit=20;
   const esc=v=>String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-  const shownCategory=value=>!value?notSpecified:value;
+  function formatSize(value){const text=String(value??"").trim();const match=text.match(/^(\d+(?:\.\d+)?|\.\d+)\s*(?:MB)?$/i);return match?match[1]+" MB":text;}
+const shownCategory=value=>!value?notSpecified:value;
   function render(){
     const q=search.value.trim().toLowerCase();
     let filtered=rows.filter(a=>(selectedCategory==="All Apps"||selectedCategory==="Recently Added"||shownCategory(a.category)===selectedCategory)&&`${a.name} ${shownCategory(a.category)} ${a.description||""}`.toLowerCase().includes(q));
@@ -20,7 +21,7 @@
     const catShown=selectedCategory==="Recently Added"?Math.min(12,catTotal):catTotal;
     document.getElementById("count").textContent=catShown+(catShown===1?" app":" apps");
 
-    grid.innerHTML=shown.map(a=>`<article class="app-card" role="button" tabindex="0" data-app-id="${esc(a.id)}" aria-label="View details for ${esc(a.name)}"><div class="app-icon">${a.icon_url?`<img src="${esc(a.icon_url)}" alt="" onerror="this.style.display='none'">`:esc((a.name||"A").slice(0,2).toUpperCase())}</div><span class="tag">${esc(shownCategory(a.category))}</span><h3>${esc(a.name)}</h3><p>${esc(a.description||"Tap to view app details.")}</p><div class="meta">${esc(a.version||"Unknown")} · ${esc(a.size||"Size unknown")}</div></article>`).join("")||"<p>No apps found in this section.</p>";
+    grid.innerHTML=shown.map(a=>`<article class="app-card" role="button" tabindex="0" data-app-id="${esc(a.id)}" aria-label="View details for ${esc(a.name)}"><div class="app-icon">${a.icon_url?`<img src="${esc(a.icon_url)}" alt="" onerror="this.style.display='none'">`:esc((a.name||"A").slice(0,2).toUpperCase())}</div><span class="tag">${esc(shownCategory(a.category))}</span><h3>${esc(a.name)}</h3><p>${esc(a.description||"Tap to view app details.")}</p><div class="meta">${esc(a.version||"Unknown")} · ${esc(formatSize(a.size)||"Size unknown")}</div></article>`).join("")||"<p>No apps found in this section.</p>";
     let pager=document.getElementById("loadMoreApps");
     if(!pager){pager=document.createElement("div");pager.id="loadMoreApps";pager.className="load-more-row";grid.insertAdjacentElement("afterend",pager);}
     pager.innerHTML=`<span class="load-count">${shown.length} of ${total} apps loaded</span>${selectedCategory!=="Recently Added"&&shown.length<total?'<button type="button" class="chip" id="loadMoreButton">Load more</button>':""}`;
@@ -76,7 +77,7 @@
     const download=/^https?:\/\//i.test(url)?`<a class="app-details-download" href="${esc(url)}" target="_blank" rel="noopener noreferrer">${customName1?esc(customName1):`Download${app.version?` · v${esc(app.version)}`:""}`}</a>`:"<p class=\"app-details-sub\">Download link not available yet.</p>";
     const url2=String(app.download_url2||"").trim();
     const download2=/^https?:\/\//i.test(url2)?`<a class="app-details-download" href="${esc(url2)}" target="_blank" rel="noopener noreferrer">${customName2?esc(customName2):"Download 2 (mirror)"}</a>`:"";
-    screen.innerHTML=`<header class="app-details-top"><button type="button" class="app-details-back" data-close>‹ Back to Home</button><strong>App Details</strong></header><div class="app-details-content"><div class="app-details-hero"><div class="app-details-icon">${icon}</div><div><h1>${esc(app.name)}</h1><div class="app-details-sub">${esc(shownCategory(app.category))}</div><div class="app-details-stats"><span class="app-details-stat">Version ${esc(app.version||"Unknown")}</span><span class="app-details-stat">Size ${esc(app.size||"Unknown")}</span></div></div></div><section class="app-details-section"><h2>About</h2><p>${esc(app.description||"No description provided yet.")}</p></section><section class="app-details-section"><h2>App information</h2><p>Category: ${esc(shownCategory(app.category))}\nVersion: ${esc(app.version||"Unknown")}\nSize: ${esc(app.size||"Unknown")}</p></section>${download}${download2}</div>`;
+    screen.innerHTML=`<header class="app-details-top"><button type="button" class="app-details-back" data-close>‹ Back to Home</button><strong>App Details</strong></header><div class="app-details-content"><div class="app-details-hero"><div class="app-details-icon">${icon}</div><div><h1>${esc(app.name)}</h1><div class="app-details-sub">${esc(shownCategory(app.category))}</div><div class="app-details-stats"><span class="app-details-stat">Version ${esc(app.version||"Unknown")}</span><span class="app-details-stat">Size ${esc(formatSize(app.size)||"Unknown")}</span></div></div></div><section class="app-details-section"><h2>About</h2><p>${esc(app.description||"No description provided yet.")}</p></section><section class="app-details-section"><h2>App information</h2><p>Category: ${esc(shownCategory(app.category))}\nVersion: ${esc(app.version||"Unknown")}\nSize: ${esc(formatSize(app.size)||"Unknown")}</p></section>${download}${download2}</div>`;
     document.body.appendChild(screen);document.body.style.overflow="hidden";
     screen.querySelector("[data-close]").addEventListener("click",closeDetails);
   }
