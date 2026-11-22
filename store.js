@@ -74,7 +74,9 @@
     const icon=app.icon_url?`<img src="${esc(app.icon_url)}" alt="${esc(app.name)}">`:esc((app.name||"A").slice(0,2).toUpperCase());
     const url=String(app.download_url||"").trim();
     const download=/^https?:\/\//i.test(url)?`<a class="app-details-download" href="${esc(url)}" target="_blank" rel="noopener noreferrer">Download${app.version?` · v${esc(app.version)}`:""}</a>`:"<p class=\"app-details-sub\">Download link not available yet.</p>";
-    screen.innerHTML=`<header class="app-details-top"><button type="button" class="app-details-back" data-close>‹ Back to Home</button><strong>App Details</strong></header><div class="app-details-content"><div class="app-details-hero"><div class="app-details-icon">${icon}</div><div><h1>${esc(app.name)}</h1><div class="app-details-sub">${esc(shownCategory(app.category))}</div><div class="app-details-stats"><span class="app-details-stat">Version ${esc(app.version||"Unknown")}</span><span class="app-details-stat">Size ${esc(app.size||"Unknown")}</span></div></div></div><section class="app-details-section"><h2>About</h2><p>${esc(app.description||"No description provided yet.")}</p></section><section class="app-details-section"><h2>App information</h2><p>Category: ${esc(shownCategory(app.category))}\nVersion: ${esc(app.version||"Unknown")}\nSize: ${esc(app.size||"Unknown")}</p></section>${download}</div>`;
+    const url2=String(app.download_url2||"").trim();
+    const download2=/^https?:\/\//i.test(url2)?`<a class="app-details-download" href="${esc(url2)}" target="_blank" rel="noopener noreferrer">Download 2 (mirror)</a>`:"";
+    screen.innerHTML=`<header class="app-details-top"><button type="button" class="app-details-back" data-close>‹ Back to Home</button><strong>App Details</strong></header><div class="app-details-content"><div class="app-details-hero"><div class="app-details-icon">${icon}</div><div><h1>${esc(app.name)}</h1><div class="app-details-sub">${esc(shownCategory(app.category))}</div><div class="app-details-stats"><span class="app-details-stat">Version ${esc(app.version||"Unknown")}</span><span class="app-details-stat">Size ${esc(app.size||"Unknown")}</span></div></div></div><section class="app-details-section"><h2>About</h2><p>${esc(app.description||"No description provided yet.")}</p></section><section class="app-details-section"><h2>App information</h2><p>Category: ${esc(shownCategory(app.category))}\nVersion: ${esc(app.version||"Unknown")}\nSize: ${esc(app.size||"Unknown")}</p></section>${download}${download2}</div>`;
     document.body.appendChild(screen);document.body.style.overflow="hidden";
     screen.querySelector("[data-close]").addEventListener("click",closeDetails);
   }
@@ -100,7 +102,7 @@
   async function load(){
     status.textContent="Loading apps…";
     const [{data:apps,error:appsError},{data:catData,error:catError}]=await Promise.all([
-      db.from("apps").select("id,name,category,description,version,size,icon_url,download_url,created_at").order("created_at",{ascending:false}),
+      db.from("apps").select("id,name,category,description,version,size,icon_url,download_url,download_url2,created_at").order("created_at",{ascending:false}),
       db.from("store_categories").select("name").order("name")
     ]);
     if(appsError){status.textContent="Could not load apps: "+appsError.message;return;}
