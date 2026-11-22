@@ -1,0 +1,55 @@
+/* App-only look (Update-2.0 test app). Loaded after the site's style.css. */
+@font-face{font-family:"ModStore Serif";src:url("fonts/SourceSerif4.woff2") format("woff2");font-weight:200 900;font-style:normal;font-display:swap}
+html,body,button,input,select,textarea{font-family:"ModStore Serif",Georgia,"Times New Roman",serif!important}
+
+/* Frosted liquid glass */
+.topbar,.app-card,.search,.status,.chip,.panel,.admin-link,.app-details-top,.app-details-back,.app-details-hero,.app-details-section,.app-details-stat,.load-more-row .chip,input,select,textarea,button.secondary{
+  background:linear-gradient(135deg,rgba(255,255,255,.17),rgba(255,255,255,.05))!important;
+  -webkit-backdrop-filter:blur(12px)!important;backdrop-filter:blur(12px)!important;
+  border:1px solid rgba(255,255,255,.22)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.38),inset 0 -1px 0 rgba(255,255,255,.07),0 10px 32px rgba(0,0,0,.38)!important}
+.topbar{border-radius:0!important;border-width:0 0 1px 0!important}
+.chip.selected{background:rgba(255,255,255,.88)!important;color:#111!important}
+.app-details-screen{background:rgba(0,0,0,.42)!important;-webkit-backdrop-filter:blur(18px)!important;backdrop-filter:blur(18px)!important}
+.app-details-download{background:rgba(255,255,255,.9)!important;color:#111!important}
+
+/* Cards: same frosted look without a live backdrop filter (much cheaper to scroll). */
+.app-card,.chip,.panel,.status,.app-details-section,.app-details-stat,.load-more-row .chip{backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+/* Keep search readable without a second layer of glass inside it. */
+.search input{background:transparent!important;border:0!important;box-shadow:none!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;color:#fff!important}
+.search input::placeholder{color:rgba(255,255,255,.8)!important;opacity:1}
+.search>span{font-size:0!important}.search>span::after{content:"\2315";font-family:Arial,sans-serif;font-size:25px;color:#fff}
+/* Strong contrast above the colored wallpaper. */
+.app-card p,.app-card .meta,.intro>p:not(.eyebrow){color:rgba(255,255,255,.88)!important;text-shadow:0 1px 2px rgba(0,0,0,.7)}
+/* Performance: promote the fixed wallpaper to its own layer so scrolling does not repaint it. */
+body::before{transform:translateZ(0)}
+
+/* Admin lag fix: no live backdrop blur on form controls, buttons or admin chrome (only fixed topbar/search/details keep it). Frosted look stays via gradient/border. */
+input,select,textarea,button.secondary,.admin-link,.app-details-top,.app-details-back,.app-details-hero{backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+input,select,textarea,.panel,.admin-link{box-shadow:inset 0 1px 0 rgba(255,255,255,.3)!important}
+
+/* Admin icon, catalogue status card, category total */
+.admin-link{display:inline-flex!important;align-items:center;justify-content:center;padding:7px 12px!important}
+.admin-icon{display:block;height:24px;width:auto}
+.status.status-ok{display:flex;align-items:center;gap:14px;padding:12px 14px;border-radius:18px}
+.status-icon{display:grid;place-items:center;flex:0 0 44px;width:44px;height:44px;border-radius:12px;font-size:22px;color:#fff;background:linear-gradient(135deg,rgba(255,255,255,.3),rgba(255,255,255,.08));border:1px solid rgba(255,255,255,.25)}
+.status-text{min-width:0}
+.status-text strong{display:block;font-size:17px;color:#fff}
+.status-text small{display:block;font-size:14px;color:rgba(255,255,255,.82);margin-top:2px}
+.section-head{justify-content:flex-start!important;gap:12px}
+.section-head #count{font-size:13px;color:#fff;padding:3px 10px;border-radius:999px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.22)}
+.section-head #count:empty{display:none}
+
+/* Search mode: only header, search box and matching apps. */
+body.search-mode .intro,body.search-mode #status,body.search-mode #categories,body.search-mode .section-head{display:none!important}
+body.search-mode .search{margin-top:20px}
+.search-info{display:none;margin:14px 4px;font-size:14px;color:rgba(255,255,255,.85);text-shadow:0 1px 2px rgba(0,0,0,.7)}
+body.search-mode .search-info{display:block}
+body.search-mode:not(.has-query) .search-info{text-align:center;margin-top:28px}
+body.search-mode:not(.has-query) #apps,body.search-mode:not(.has-query) #loadMoreApps{display:none}
+.search input[type=search]::-webkit-search-cancel-button{-webkit-appearance:none;appearance:none}
+
+/* Admin tabs: keep Build App / Manage Category / Listing on one line, even on narrow screens. */
+.admin-section-picker{display:flex;flex-wrap:nowrap;gap:6px;align-items:stretch}
+.admin-section-picker .admin-tab{flex:1 1 0;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding-left:6px!important;padding-right:6px!important;font-size:13px}
+@media(max-width:520px){.admin-section-picker .admin-tab{font-size:12px;padding-left:4px!important;padding-right:4px!important}}
