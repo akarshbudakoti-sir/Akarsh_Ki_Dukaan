@@ -53,3 +53,6 @@ body.search-mode:not(.has-query) #apps,body.search-mode:not(.has-query) #loadMor
 .admin-section-picker{display:flex;flex-wrap:nowrap;gap:6px;align-items:stretch}
 .admin-section-picker .admin-tab{flex:1 1 0;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding-left:6px!important;padding-right:6px!important;font-size:13px}
 @media(max-width:520px){.admin-section-picker .admin-tab{font-size:12px;padding-left:4px!important;padding-right:4px!important}}
+
+/* Optional second download URL control in admin form. */
+.url-add-btn{padding:2px 10px!important;font-size:12px!important;margin-left:6px;width:auto!important}
