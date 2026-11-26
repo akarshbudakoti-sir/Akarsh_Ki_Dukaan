@@ -63,7 +63,7 @@ const shownCategory=value=>!value?notSpecified:value;
   }
   function removeDetails(){const screen=document.getElementById("appDetailsScreen");if(screen)screen.remove();document.body.style.overflow="";}
   const hasDetailsState=()=>!!(history.state&&history.state.k==="details");
-  function closeDetails(){if(hasDetailsState())history.back();else removeDetails();}
+  function closeDetails(){removeDetails();if(hasDetailsState())history.back();}
   window.addEventListener("popstate",e=>{if(document.getElementById("appDetailsScreen")&&!(e.state&&e.state.k==="details"))removeDetails();});
   try{history.replaceState({k:"home"},"",window.location.href);}catch(_){}
   function openAppDetails(app){
