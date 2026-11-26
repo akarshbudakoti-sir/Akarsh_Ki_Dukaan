@@ -61,17 +61,14 @@ const shownCategory=value=>!value?notSpecified:value;
     };
     requestAnimationFrame(arrangeCategories);
   }
-  let detailsHistoryOpen=false;
+  const layers=[];
+  function pushLayer(k){history.pushState({d:layers.length+1},"",window.location.href);layers.push({k,inert:false});}
   function removeDetails(){const screen=document.getElementById("appDetailsScreen");if(screen)screen.remove();document.body.style.overflow="";}
-  function closeDetails(){if(detailsHistoryOpen)history.back();else removeDetails();}
-  window.addEventListener("popstate",()=>{
-    if(document.getElementById("appDetailsScreen")){removeDetails();detailsHistoryOpen=false;return;}
-    if(document.body.classList.contains("search-mode")){searchHistoryOpen=false;search.value="";search.blur();restoreBrowsing();return;}
-    detailsHistoryOpen=false;
-  });
+  function closeDetails(){const t=layers[layers.length-1];if(t&&t.k==="details")history.back();else removeDetails();}
+  window.addEventListener("popstate",e=>{const target=(e.state&&e.state.d)||0;while(layers.length>target){const l=layers.pop();if(l.inert)continue;if(l.k==="details")removeDetails();else if(l.k==="search"){search.value="";restoreBrowsing();search.blur();}}const t=layers[layers.length-1];if(t&&t.inert)history.back();});
   function openAppDetails(app){
     if(document.getElementById("appDetailsScreen"))removeDetails();
-    if(!detailsHistoryOpen){history.pushState({appDetails:true},"",window.location.href);detailsHistoryOpen=true;}
+    if(!layers.some(l=>l.k==="details"))pushLayer("details");
     const screen=document.createElement("section");screen.id="appDetailsScreen";screen.className="app-details-screen";
     const icon=app.icon_url?`<img src="${esc(app.icon_url)}" alt="${esc(app.name)}">`:esc((app.name||"A").slice(0,2).toUpperCase());
     const url=String(app.download_url||"").trim();const customName1=String(app.download_name||"").trim();const customName2=String(app.download_name2||"").trim();
@@ -93,8 +90,8 @@ const shownCategory=value=>!value?notSpecified:value;
   document.querySelector("label.search").insertAdjacentHTML("afterend",'<p id="searchInfo" class="search-info"></p>');
   let prevCategory="All Apps",searchHistoryOpen=false;
   const restoreBrowsing=()=>{document.body.classList.remove("search-mode","has-query");selectedCategory=prevCategory;loadedLimit=20;render();};
-  const enterSearch=()=>{if(document.body.classList.contains("search-mode"))return;prevCategory=selectedCategory;selectedCategory="All Apps";loadedLimit=20;document.body.classList.add("search-mode");window.scrollTo(0,0);if(!searchHistoryOpen){history.pushState({storeSearch:true},"",window.location.href);searchHistoryOpen=true;}render();};
-  const exitSearch=()=>{if(search.value.trim()||!document.body.classList.contains("search-mode"))return;restoreBrowsing();if(searchHistoryOpen){searchHistoryOpen=false;history.back();}};
+  const enterSearch=()=>{if(document.body.classList.contains("search-mode"))return;prevCategory=selectedCategory;selectedCategory="All Apps";loadedLimit=20;document.body.classList.add("search-mode");window.scrollTo(0,0);{const tp=layers[layers.length-1];if(tp&&tp.k==="search"&&tp.inert)tp.inert=false;else pushLayer("search");}render();};
+  const exitSearch=()=>{if(search.value.trim()||!document.body.classList.contains("search-mode"))return;restoreBrowsing();const s=layers.slice().reverse().find(l=>l.k==="search"&&!l.inert);if(s){s.inert=true;setTimeout(()=>{if(layers[layers.length-1]===s&&s.inert)history.back();},350);}};
   search.addEventListener("focus",enterSearch);
   search.addEventListener("blur",exitSearch);
   search.addEventListener("input",()=>{if(!search.value.trim()&&document.activeElement!==search)exitSearch();});
