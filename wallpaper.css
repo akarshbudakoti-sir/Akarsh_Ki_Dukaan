@@ -1,5 +1,58 @@
-/* Store wallpaper. Not loaded on the admin page. */
-html{background:#000!important}
-body{background:transparent!important}
-body::before{content:""!important;display:block!important;position:fixed;inset:0;z-index:-1;
-  background:linear-gradient(rgba(0,0,0,.18),rgba(0,0,0,.45)),url("wallpaper.jpg") center/cover no-repeat}
+/* ModStore cream theme (replaces the old wallpaper; loaded last on the store only) */
+/* Cream theme (store only). Loaded last in index.html. */
+:root{color-scheme:light;--cream:#fbf7ee;--cream2:#e6dac0;--card:#fbf6ea;--ink:#3b2f22;--ink2:#6f5f4a;--line:rgba(120,96,60,.28);--accent:#6b4423}
+html,body{background:#fbf7ee!important}
+body{color:var(--ink)!important}
+body::before{content:none!important;display:none!important}
+.topbar,.app-card,.search,.status,.chip,.panel,.admin-link,.app-details-top,.app-details-back,.app-details-hero,.app-details-section,.app-details-stat,.load-more-row .chip,input,select,textarea,button.secondary{
+  background:#f1e8d6!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;
+  border:1px solid var(--line)!important;color:var(--ink)!important;
+  box-shadow:none!important}
+.topbar{background:#fbf7ee!important;box-shadow:none!important}
+.search,input{background:#f6efe0!important}
+.app-icon,.status-icon,.tag,.section-head #count{background:#e6dac0!important}
+.app-details-screen{background:#fbf7ee!important}
+.app-details-hero,.app-details-section,.app-details-stat,.app-details-top,.app-details-back{background:#f1e8d6!important}
+.brand{color:var(--ink)!important}
+.brand-mark{background:var(--accent)!important;color:#fbf3e0!important}
+.intro h1,.intro h1 span,.section-head h2,.app-card h3,.eyebrow,.status-text strong{color:var(--ink)!important;text-shadow:none!important}
+.intro h1 span{color:var(--accent)!important}
+.eyebrow{color:var(--ink2)!important}
+.app-card p,.app-card .meta,.intro>p:not(.eyebrow),.status-text small,.search-info,.section-head span,footer,.muted{color:var(--ink2)!important;text-shadow:none!important}
+.search input{color:var(--ink)!important}
+.search input::placeholder{color:#8d7c63!important}
+.search>span::after{color:var(--accent)!important}
+.status-icon{background:var(--cream2)!important;color:var(--accent)!important;border:1px solid var(--line)!important}
+.chip{color:var(--ink)!important}
+.chip.selected{background:var(--accent)!important;color:#fbf3e0!important;border-color:var(--accent)!important}
+.tag{background:var(--cream2)!important;color:var(--accent)!important;border-color:var(--line)!important}
+.app-icon{background:var(--cream2)!important;color:var(--accent)!important}
+.section-head #count{background:var(--cream2)!important;color:var(--accent)!important;border-color:var(--line)!important}
+.primary,.app-details-download{background:var(--accent)!important;color:#fbf3e0!important;border-color:var(--accent)!important}
+.app-details-screen *{color:var(--ink)}
+.app-details-screen .app-details-download{color:#fbf3e0!important}
+footer{border-top-color:var(--line)!important}
+
+/* v2: soft raised (neumorphic) cream, per Akarsh's reference image */
+html,body{background:#f6efdf!important}
+:root{--raise:6px 6px 14px rgba(160,130,85,.28),-6px -6px 14px rgba(255,255,250,.95);--raise-s:4px 4px 10px rgba(160,130,85,.25),-4px -4px 10px rgba(255,255,250,.95);--inset:inset 3px 3px 7px rgba(160,130,85,.22),inset -3px -3px 7px rgba(255,255,250,.9)}
+.topbar{background:#f6efdf!important;border:0!important;box-shadow:0 4px 14px rgba(160,130,85,.2)!important}
+.app-card,.status,.panel,.app-details-hero,.app-details-section,.app-details-stat{background:#f6efdf!important;border:1px solid rgba(255,255,255,.55)!important;border-radius:26px!important;box-shadow:var(--raise)!important}
+.search{background:#f6efdf!important;border:1px solid rgba(255,255,255,.55)!important;border-radius:999px!important;box-shadow:var(--raise)!important;padding:12px 20px!important}
+.search input{background:transparent!important;box-shadow:none!important;border:0!important}
+input,select,textarea{background:#f6efdf!important;border:0!important;border-radius:16px!important;box-shadow:var(--inset)!important}
+.chip,.load-more-row .chip,button.secondary,.admin-link,.app-details-back,.app-details-top{background:#f6efdf!important;border:1px solid rgba(255,255,255,.55)!important;border-radius:20px!important;box-shadow:var(--raise-s)!important}
+.chip.selected{background:#f0d27f!important;color:#3b2f22!important;border-color:rgba(255,255,255,.55)!important;box-shadow:4px 4px 10px rgba(200,160,70,.4),-4px -4px 10px rgba(255,255,250,.9)!important}
+.app-icon,.status-icon{background:#f6efdf!important;border-radius:18px!important;box-shadow:var(--inset)!important;border:0!important}
+.tag,.section-head #count{background:#f6efdf!important;border:0!important;box-shadow:var(--inset)!important}
+.brand-mark{box-shadow:var(--raise-s)!important;border-radius:14px!important}
+.primary,.app-details-download{background:linear-gradient(145deg,#7a4e2a,#5e3b1d)!important;color:#fbf3e0!important;border:0!important;border-radius:18px!important;box-shadow:5px 5px 12px rgba(94,59,29,.35),-4px -4px 10px rgba(255,255,250,.9)!important}
+.app-details-screen{background:#f6efdf!important}
+.intro h1 span{color:#d9a93a!important}
+.section-head h2,.intro h1{font-weight:800}
+/* v3: clearer soft white rim like the reference */
+.app-card,.status,.search,.panel,.app-details-hero,.app-details-section,.app-details-stat{border:2px solid rgba(255,255,255,.85)!important}
+.chip,.admin-link,.app-details-back{border:1.5px solid rgba(255,255,255,.85)!important}
+/* v4: no white outline; raised look from shadows only */
+.app-card,.status,.search,.panel,.app-details-hero,.app-details-section,.app-details-stat,.chip,.load-more-row .chip,button.secondary,.admin-link,.app-details-back,.app-details-top,.chip.selected,.brand-mark{border:0!important}
+.brand-mark{font-size:0!important;color:transparent!important;overflow:hidden;border-radius:12px!important;background:#000 url(data:image/png;base64,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) center/cover no-repeat!important}
