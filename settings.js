@@ -263,7 +263,7 @@
   const ROWS = [
     { id: "admin",    icon: '<span class="set-icon-admin"></span>', label: "Admin",            sub: "Manage apps and categories" },
     { id: "downloads",icon: DL_ICON, label: "Downloads",     sub: "Apps you tapped Download on" },
-    { id: "appear",   icon: '<span class="set-icon-appear">◐</span>',  label: "Appearances",      sub: "Mode, theme, glass, wallpaper" },
+    { id: "appear",   icon: '<span class="set-icon-appear" style="font-size:20px">🎨</span>',  label: "Appearances",      sub: "Mode, theme, glass, wallpaper" },
     { id: "update",   icon: '<span class="set-icon-wa"></span>',  label: "Request an App Update",sub: "Message Akarsh on WhatsApp" },
     { id: "about",    icon: '<span class="set-icon-about"></span>', label: "About",            sub: "Version and developer" },
   ];
@@ -374,11 +374,12 @@
           '<button type="button" class="set-bg-action" data-bg-change>Change</button>' +
           '<button type="button" class="set-bg-action danger" data-bg-remove>Remove</button>' +
           '</div>' : '') +
+        ((owned.wallpapers.includes("custom") && prefs.background === "custom") ? '' :
         '<button type="button" class="set-choice set-add" data-bg-add>' +
         '<span class="set-add-plus">' + (failed.has("bg:add") ? "!" : "+") + '</span>' +
         '<span class="set-label">Add<small>' +
         (failed.has("bg:add") ? "couldn't add that photo - tap to retry" : "your own photo from this device") +
-        '</small></span></button>' +
+        '</small></span></button>') +
         '<input type="file" accept="image/*" style="display:none" data-bg-file>' +
         '<p class="settings-note" style="margin:8px 2px 0">Your photo saves on this device, and picking a theme replaces it with the theme\'s own wallpaper.</p></div>' +
         '</div>';
