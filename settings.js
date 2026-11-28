@@ -263,8 +263,8 @@
   const ROWS = [
     { id: "admin",    icon: '<span class="set-icon-admin"></span>', label: "Admin",            sub: "Manage apps and categories" },
     { id: "downloads",icon: DL_ICON, label: "Downloads",     sub: "Apps you tapped Download on" },
-    { id: "appear",   icon: "◐",  label: "Appearances",      sub: "Mode, theme, glass, wallpaper" },
-    { id: "update",   icon: "✆",  label: "Request an App Update",sub: "Message Akarsh on WhatsApp" },
+    { id: "appear",   icon: '<span class="set-icon-appear">◐</span>',  label: "Appearances",      sub: "Mode, theme, glass, wallpaper" },
+    { id: "update",   icon: '<span class="set-icon-wa"></span>',  label: "Request an App Update",sub: "Message Akarsh on WhatsApp" },
     { id: "about",    icon: '<span class="set-icon-about"></span>', label: "About",            sub: "Version and developer" },
   ];
 
