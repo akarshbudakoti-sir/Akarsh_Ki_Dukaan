@@ -65,7 +65,6 @@ html[data-theme="cream"][data-glass="on"] .status,
 html[data-theme="cream"][data-glass="on"] .panel,
 html[data-theme="cream"][data-glass="on"] .chip:not(.selected),
 html[data-theme="cream"][data-glass="on"] .search,
-html[data-theme="cream"][data-glass="on"] .topbar,
 html[data-theme="cream"][data-glass="on"] .admin-link{
   background:linear-gradient(135deg,rgba(255,255,255,.58),rgba(255,255,255,.24))!important;
   -webkit-backdrop-filter:none!important;backdrop-filter:none!important;
@@ -282,7 +281,7 @@ html[data-theme="default"] .dl-clear{background:#26272a;box-shadow:none;color:#a
 /* liquid glass on the Default theme */
 html[data-theme="default"][data-glass="on"] .app-card,html[data-theme="default"][data-glass="on"] .panel,
 html[data-theme="default"][data-glass="on"] .chip:not(.selected),html[data-theme="default"][data-glass="on"] .search,
-html[data-theme="default"][data-glass="on"] .topbar,html[data-theme="default"][data-glass="on"] .admin-link{
+html[data-theme="default"][data-glass="on"] .admin-link{
   background:linear-gradient(135deg,rgba(255,255,255,.13),rgba(255,255,255,.04))!important;
   backdrop-filter:none!important;-webkit-backdrop-filter:none!important;
   border:1px solid rgba(255,255,255,.18)!important;
@@ -360,7 +359,6 @@ html[data-theme="glass"][data-glass="on"] .status,
 html[data-theme="glass"][data-glass="on"] .panel,
 html[data-theme="glass"][data-glass="on"] .chip:not(.selected),
 html[data-theme="glass"][data-glass="on"] .search,
-html[data-theme="glass"][data-glass="on"] .topbar,
 html[data-theme="glass"][data-glass="on"] .admin-link{
   background:linear-gradient(135deg,rgba(255,255,255,.16),rgba(255,255,255,.05))!important;
   backdrop-filter:none!important;-webkit-backdrop-filter:none!important;
@@ -378,7 +376,7 @@ html[data-theme="glass"] .set-bg-action{background:rgba(255,255,255,.12);box-sha
 html[data-theme="glass"] .set-bg-action.danger{color:#ffb4ab}
 
 /* ---- Default theme in Light mode: white Google-style look (his Google app screenshot) ---- */
-html[data-mode="light"]{color-scheme:light}
+html[data-mode="light"]{color-scheme:only light}
 html[data-theme="default"][data-mode="light"]{--set-bg:#ffffff;--set-card:#ffffff;--set-ink:#1f1f1f;--set-ink2:#5f6368;
   --set-accent:#0b57d0;--set-on-accent:#ffffff;--set-line:rgba(0,0,0,.12);
   --set-raise:none;--set-raise-s:none;--set-inset:none}
@@ -433,7 +431,7 @@ html[data-theme="default"][data-mode="light"] .set-bg-action.danger{color:#b3261
 /* liquid glass on the white Default look */
 html[data-theme="default"][data-mode="light"][data-glass="on"] .app-card,html[data-theme="default"][data-mode="light"][data-glass="on"] .panel,
 html[data-theme="default"][data-mode="light"][data-glass="on"] .chip:not(.selected),html[data-theme="default"][data-mode="light"][data-glass="on"] .search,
-html[data-theme="default"][data-mode="light"][data-glass="on"] .topbar,html[data-theme="default"][data-mode="light"][data-glass="on"] .admin-link{
+html[data-theme="default"][data-mode="light"][data-glass="on"] .admin-link{
   background:linear-gradient(150deg,rgba(255,255,255,.35),rgba(255,255,255,.08) 45%,rgba(235,240,250,.18))!important;
   backdrop-filter:none!important;-webkit-backdrop-filter:none!important;
   border:1px solid rgba(255,255,255,.65)!important;
@@ -466,3 +464,14 @@ html[data-theme="default"][data-mode="light"][data-bg="custom"] body::after{
 
 /* ---- Appearance row icon: zoomed out inside its tile ---- */
 .set-icon-appear{font-size:12px;line-height:1;display:block}
+
+/* ---- store topbar always frosted, every theme (Akarsh, 2026-11-28) ---- */
+html[data-theme] .topbar{
+  background:linear-gradient(135deg,rgba(255,255,255,.14),rgba(255,255,255,.04))!important;
+  -webkit-backdrop-filter:blur(14px) saturate(1.6)!important;backdrop-filter:blur(14px) saturate(1.6)!important;
+  border-bottom:1px solid rgba(255,255,255,.22)!important;
+  box-shadow:0 10px 26px rgba(0,0,0,.28)!important}
+html[data-theme="default"][data-mode="light"] .topbar,html[data-theme="cream"] .topbar{
+  background:linear-gradient(135deg,rgba(255,255,255,.55),rgba(255,255,255,.2))!important;
+  border-bottom-color:rgba(0,0,0,.08)!important;
+  box-shadow:0 10px 26px rgba(120,96,60,.18)!important}
