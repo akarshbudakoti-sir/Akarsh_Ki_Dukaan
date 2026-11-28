@@ -11,6 +11,33 @@
   function formatSize(value){const text=String(value??"").trim();const match=text.match(/^(\d+(?:\.\d+)?|\.\d+)\s*(?:MB)?$/i);return match?match[1]+" MB":text;}
   function formatVersion(value){const text=String(value??"").trim();if(!text||text.toLowerCase()==="unknown")return text||"Unknown";return "v"+text.replace(/^[vV]\s*/,"");}
 const shownCategory=value=>!value?notSpecified:value;
+  /* Lays out the category chips (how many rows fit before "+N more").
+     Hoisted out of render() so resize can re-arrange without re-rendering
+     the whole grid (the old double more.click() caused full re-renders on
+     mobile scroll, when the browser toolbar toggles and fires resize). */
+  const arrangeCategories=()=>{
+    const more=cats.querySelector("[data-more]");
+    if(!more)return;
+    const chips=[...cats.querySelectorAll("[data-cat]")];
+    chips.forEach(chip=>{chip.hidden=false;});
+    more.hidden=false;
+    more.textContent="More ⌄";
+    if(categoriesExpanded){more.textContent="Show less ⌃";return;}
+    const rowTops=()=>[...new Set(chips.filter(chip=>!chip.hidden).map(chip=>chip.offsetTop))].sort((a,b)=>a-b);
+    let tops=rowTops();
+    if(tops.length<=2){more.hidden=true;return;}
+    const secondRowTop=tops[1];
+    chips.forEach(chip=>{if(chip.offsetTop>secondRowTop)chip.hidden=true;});
+    let visible=chips.filter(chip=>!chip.hidden);
+    while(more.offsetTop>secondRowTop && visible.length){
+      const last=visible.pop();
+      last.hidden=true;
+      tops=rowTops();
+    }
+    const hiddenCount=chips.filter(chip=>chip.hidden).length;
+    more.hidden=hiddenCount===0;
+    more.textContent=`+${hiddenCount} more ⌄`;
+  };
   function render(){
     const q=search.value.trim().toLowerCase();
     let filtered=rows.filter(a=>(selectedCategory==="All Apps"||selectedCategory==="Recently Added"||shownCategory(a.category)===selectedCategory)&&`${a.name} ${shownCategory(a.category)} ${a.description||""}`.toLowerCase().includes(q));
@@ -37,35 +64,13 @@ const shownCategory=value=>!value?notSpecified:value;
     cats.classList.toggle("categories-expanded",categoriesExpanded);
     cats.innerHTML=chipItems.map(c=>`<button class="chip ${c.name===selectedCategory?"selected":""}" data-cat="${esc(c.name)}">${esc(c.name)}</button>`).join("")+
       `<button class="chip chip-more" data-more aria-expanded="${categoriesExpanded}">${categoriesExpanded?"Show less":"More"} <span aria-hidden="true">${categoriesExpanded?"⌃":"⌄"}</span></button>`;
-    const more=cats.querySelector("[data-more]");
-    const arrangeCategories=()=>{
-      const chips=[...cats.querySelectorAll("[data-cat]")];
-      chips.forEach(chip=>{chip.hidden=false;});
-      more.hidden=false;
-      more.textContent="More ⌄";
-      if(categoriesExpanded){more.textContent="Show less ⌃";return;}
-      const rowTops=()=>[...new Set(chips.filter(chip=>!chip.hidden).map(chip=>chip.offsetTop))].sort((a,b)=>a-b);
-      let tops=rowTops();
-      if(tops.length<=2){more.hidden=true;return;}
-      const secondRowTop=tops[1];
-      chips.forEach(chip=>{if(chip.offsetTop>secondRowTop)chip.hidden=true;});
-      let visible=chips.filter(chip=>!chip.hidden);
-      while(more.offsetTop>secondRowTop && visible.length){
-        const last=visible.pop();
-        last.hidden=true;
-        tops=rowTops();
-      }
-      const hiddenCount=chips.filter(chip=>chip.hidden).length;
-      more.hidden=hiddenCount===0;
-      more.textContent=`+${hiddenCount} more ⌄`;
-    };
     requestAnimationFrame(arrangeCategories);
   }
   function removeDetails(){const screen=document.getElementById("appDetailsScreen");if(screen)screen.remove();document.body.style.overflow="";}
   const hasDetailsState=()=>!!(history.state&&history.state.k==="details");
   function closeDetails(){removeDetails();if(hasDetailsState())history.back();}
   window.addEventListener("popstate",e=>{if(document.getElementById("appDetailsScreen")&&!(e.state&&e.state.k==="details"))removeDetails();});
-  try{history.replaceState({k:"home"},"",window.location.href);}catch(_){}
+  try{if(!history.state||!history.state.k)history.replaceState({k:"home"},"",window.location.href);}catch(_){}
   function openAppDetails(app){
     if(document.getElementById("appDetailsScreen"))removeDetails();
     if(!hasDetailsState())history.pushState({k:"details"},"",window.location.href);
@@ -97,7 +102,7 @@ const shownCategory=value=>!value?notSpecified:value;
   search.addEventListener("input",()=>{if(!search.value.trim()&&document.activeElement!==search)exitSearch();});
   search.addEventListener("keydown",e=>{if(e.key==="Enter"||e.keyCode===13){e.preventDefault();search.blur();}});
   search.addEventListener("search",()=>{if(document.activeElement===search&&search.value.trim())search.blur();});
-  window.addEventListener("resize",()=>{if(!categoriesExpanded)requestAnimationFrame(()=>{const more=cats.querySelector("[data-more]");if(more)more.click();if(more)more.click();});});
+  window.addEventListener("resize",()=>{requestAnimationFrame(arrangeCategories);});
   async function load(){
     status.textContent="Loading apps…";
     const [{data:apps,error:appsError},{data:catData,error:catError}]=await Promise.all([
