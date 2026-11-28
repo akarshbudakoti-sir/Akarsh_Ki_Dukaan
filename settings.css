@@ -1,0 +1,342 @@
+/* ModStore Settings (demo). Loaded after wallpaper.css so it wins ties. */
+
+/* ---- theme variables for the settings screens ---- */
+:root{
+  --set-bg:#f6efdf;--set-card:#f6efdf;--set-ink:#3b2f22;--set-ink2:#6f5f4a;
+  --set-accent:#6b4423;--set-on-accent:#fbf3e0;--set-line:rgba(120,96,60,.28);
+  --set-raise:6px 6px 14px rgba(160,130,85,.28),-6px -6px 14px rgba(255,255,250,.95);
+  --set-raise-s:4px 4px 10px rgba(160,130,85,.25),-4px -4px 10px rgba(255,255,250,.95);
+  --set-inset:inset 3px 3px 7px rgba(160,130,85,.22),inset -3px -3px 7px rgba(255,255,250,.9);
+}
+
+/* ---- dark mode (cream theme) ---- */
+html[data-theme="cream"][data-mode="dark"]{
+  --set-bg:#1b1610;--set-card:#241d14;--set-ink:#f3ead9;--set-ink2:#b3a48c;
+  --set-accent:#d9a93a;--set-on-accent:#2b2103;--set-line:rgba(240,220,180,.16);
+  --set-raise:6px 6px 14px rgba(0,0,0,.55),-6px -6px 14px rgba(255,240,210,.05);
+  --set-raise-s:4px 4px 10px rgba(0,0,0,.5),-4px -4px 10px rgba(255,240,210,.05);
+  --set-inset:inset 3px 3px 7px rgba(0,0,0,.5),inset -3px -3px 7px rgba(255,240,210,.05);
+}
+html[data-theme="cream"][data-mode="dark"] body{background:#1b1610!important;color:#f3ead9!important}
+html[data-theme="cream"][data-mode="dark"] .topbar{background:#1b1610!important;box-shadow:0 4px 14px rgba(0,0,0,.5)!important}
+html[data-theme="cream"][data-mode="dark"] .app-card,html[data-theme="cream"][data-mode="dark"] .status,html[data-theme="cream"][data-mode="dark"] .panel,
+html[data-theme="cream"][data-mode="dark"] .app-details-hero,html[data-theme="cream"][data-mode="dark"] .app-details-section,
+html[data-theme="cream"][data-mode="dark"] .app-details-stat,html[data-theme="cream"][data-mode="dark"] .search{
+  background:#241d14!important;box-shadow:6px 6px 14px rgba(0,0,0,.55),-6px -6px 14px rgba(255,240,210,.05)!important}
+html[data-theme="cream"][data-mode="dark"] .search{background:#1b1610!important;box-shadow:inset 3px 3px 7px rgba(0,0,0,.5),inset -3px -3px 7px rgba(255,240,210,.05)!important}
+html[data-theme="cream"][data-mode="dark"] .chip,html[data-theme="cream"][data-mode="dark"] .load-more-row .chip,html[data-theme="cream"][data-mode="dark"] button.secondary,
+html[data-theme="cream"][data-mode="dark"] .admin-link,html[data-theme="cream"][data-mode="dark"] .app-details-back,html[data-theme="cream"][data-mode="dark"] .app-details-top{
+  background:#241d14!important;box-shadow:4px 4px 10px rgba(0,0,0,.5),-4px -4px 10px rgba(255,240,210,.05)!important;color:#f3ead9!important}
+html[data-theme="cream"][data-mode="dark"] input,html[data-theme="cream"][data-mode="dark"] select,html[data-theme="cream"][data-mode="dark"] textarea{
+  background:#1b1610!important;box-shadow:inset 3px 3px 7px rgba(0,0,0,.5),inset -3px -3px 7px rgba(255,240,210,.05)!important;color:#f3ead9!important}
+html[data-theme="cream"][data-mode="dark"] .app-icon,html[data-theme="cream"][data-mode="dark"] .status-icon{
+  background:#1b1610!important;box-shadow:inset 3px 3px 7px rgba(0,0,0,.5),inset -3px -3px 7px rgba(255,240,210,.05)!important;color:#d9a93a!important;border:0!important}
+html[data-theme="cream"][data-mode="dark"] .tag,html[data-theme="cream"][data-mode="dark"] .section-head #count{
+  background:#1b1610!important;box-shadow:inset 3px 3px 7px rgba(0,0,0,.5),inset -3px -3px 7px rgba(255,240,210,.05)!important;color:#d9a93a!important;border:0!important}
+html[data-theme="cream"][data-mode="dark"] .brand,html[data-theme="cream"][data-mode="dark"] .intro h1,html[data-theme="cream"][data-mode="dark"] .section-head h2,
+html[data-theme="cream"][data-mode="dark"] .app-card h3,html[data-theme="cream"][data-mode="dark"] .eyebrow,html[data-theme="cream"][data-mode="dark"] .status-text strong{color:#f3ead9!important}
+html[data-theme="cream"][data-mode="dark"] .app-card p,html[data-theme="cream"][data-mode="dark"] .app-card .meta,html[data-theme="cream"][data-mode="dark"] .intro>p:not(.eyebrow),
+html[data-theme="cream"][data-mode="dark"] .status-text small,html[data-theme="cream"][data-mode="dark"] .search-info,html[data-theme="cream"][data-mode="dark"] .section-head span,
+html[data-theme="cream"][data-mode="dark"] footer,html[data-theme="cream"][data-mode="dark"] .muted{color:#b3a48c!important;text-shadow:none!important}
+html[data-theme="cream"][data-mode="dark"] .eyebrow{color:#b3a48c!important}
+html[data-theme="cream"][data-mode="dark"] .search input{color:#f3ead9!important}
+html[data-theme="cream"][data-mode="dark"] .search input::placeholder{color:#8d7c63!important}
+html[data-theme="cream"][data-mode="dark"] .search>span::after{color:#d9a93a!important}
+html[data-theme="cream"][data-mode="dark"] .status-icon{color:#d9a93a!important}
+html[data-theme="cream"][data-mode="dark"] .chip.selected{background:#f0d27f!important;color:#3b2f22!important}
+html[data-theme="cream"][data-mode="dark"] .app-details-screen{background:#1b1610!important}
+html[data-theme="cream"][data-mode="dark"] .app-details-screen *{color:#f3ead9}
+html[data-theme="cream"][data-mode="dark"] .app-details-screen .app-details-download{color:#fbf3e0!important}
+html[data-theme="cream"][data-mode="dark"] footer{border-top-color:rgba(240,220,180,.16)!important}
+html[data-theme="cream"][data-mode="dark"] .load-count{color:#b3a48c!important}
+
+/* ---- backgrounds ---- */
+html[data-bg="car"] body::before{
+  display:block!important;content:""!important;position:fixed;inset:0;z-index:-1;
+  background:url("wallpaper.jpg") center/cover no-repeat;transform:translateZ(0)}
+html[data-bg="gradient"] body::before{
+  display:block!important;content:""!important;position:fixed;inset:0;z-index:-1;
+  background:linear-gradient(165deg,#f6d8a8 0%,#e8a25e 45%,#7a4e2a 100%);transform:translateZ(0)}
+html[data-bg="plain"] body::before{display:none!important}
+
+/* ---- liquid glass switch (cream theme) ---- */
+html[data-theme="cream"][data-glass="on"] .app-card,
+html[data-theme="cream"][data-glass="on"] .status,
+html[data-theme="cream"][data-glass="on"] .panel,
+html[data-theme="cream"][data-glass="on"] .chip:not(.selected),
+html[data-theme="cream"][data-glass="on"] .search,
+html[data-theme="cream"][data-glass="on"] .topbar,
+html[data-theme="cream"][data-glass="on"] .admin-link{
+  background:rgba(251,247,238,.66)!important;
+  -webkit-backdrop-filter:blur(14px)!important;backdrop-filter:blur(14px)!important;
+  border:1px solid rgba(255,255,255,.32)!important}
+html[data-theme="cream"][data-mode="dark"][data-glass="on"] .app-card,
+html[data-theme="cream"][data-mode="dark"][data-glass="on"] .status,
+html[data-theme="cream"][data-mode="dark"][data-glass="on"] .panel,
+html[data-theme="cream"][data-mode="dark"][data-glass="on"] .chip:not(.selected),
+html[data-theme="cream"][data-mode="dark"][data-glass="on"] .search,
+html[data-theme="cream"][data-mode="dark"][data-glass="on"] .topbar,
+html[data-theme="cream"][data-mode="dark"][data-glass="on"] .admin-link{
+  background:rgba(27,22,16,.68)!important;
+  -webkit-backdrop-filter:blur(14px)!important;backdrop-filter:blur(14px)!important;
+  border:1px solid rgba(255,240,210,.13)!important}
+
+/* ---- glass (old) theme helpers ---- */
+html[data-theme="glass"] body::before{
+  display:block!important;content:""!important;position:fixed;inset:0;z-index:-1;
+  background:url("wallpaper.jpg") center/cover no-repeat;transform:translateZ(0)}
+html[data-theme="glass"] .admin-link{color:#f5f5f5!important}
+html[data-theme="glass"][data-glass="off"] .app-card,
+html[data-theme="glass"][data-glass="off"] .status,
+html[data-theme="glass"][data-glass="off"] .chip:not(.selected),
+html[data-theme="glass"][data-glass="off"] .search,
+html[data-theme="glass"][data-glass="off"] .panel,
+html[data-theme="glass"][data-glass="off"] .admin-link{
+  background:#141414!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important;
+  border:1px solid #333!important;box-shadow:none!important}
+
+/* ---- settings gear button ---- */
+.settings-btn{cursor:pointer;font:inherit}
+.settings-btn svg{display:block;height:22px;width:22px}
+
+/* ---- settings overlay ---- */
+.settings-screen{position:fixed;inset:0;z-index:1100;overflow:auto;background:var(--set-bg);color:var(--set-ink);
+  font-family:"ModStore Serif",Georgia,"Times New Roman",serif}
+html[data-theme="glass"] .settings-screen{background:rgba(0,0,0,.55);-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px)}
+.settings-top{position:sticky;top:0;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding:14px clamp(12px,4vw,44px);background:var(--set-bg)}
+html[data-theme="glass"] .settings-top{background:transparent}
+.settings-top strong{font-size:18px}
+.settings-back{background:var(--set-card);color:var(--set-ink);border:0;border-radius:14px;padding:9px 14px;
+  box-shadow:var(--set-raise-s);cursor:pointer;font:inherit;font-size:14px}
+html[data-theme="glass"] .settings-back{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);color:#f5f5f5;box-shadow:none}
+.settings-content{max-width:640px;margin:0 auto;padding:18px 18px 60px;display:grid;gap:14px}
+.settings-note{font-size:13px;color:var(--set-ink2);margin:2px 4px}
+html[data-theme="glass"] .settings-note{color:rgba(255,255,255,.8)}
+
+.set-row{display:flex;align-items:center;gap:14px;width:100%;text-align:left;padding:14px 16px;
+  background:var(--set-card);border:0;border-radius:20px;box-shadow:var(--set-raise);
+  color:var(--set-ink);cursor:pointer;font:inherit;font-size:16px}
+html[data-theme="glass"] .set-row{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.3);color:#f5f5f5}
+.set-row:active{transform:scale(.99)}
+.set-icon{display:grid;place-items:center;flex:0 0 40px;width:40px;height:40px;border-radius:12px;
+  box-shadow:var(--set-inset);font-size:19px;color:var(--set-accent)}
+html[data-theme="glass"] .set-icon{box-shadow:none;background:rgba(255,255,255,.14);color:#fff}
+.set-label{flex:1;min-width:0}
+.set-label small{display:block;font-size:12px;color:var(--set-ink2);margin-top:2px}
+html[data-theme="glass"] .set-label small{color:rgba(255,255,255,.75)}
+.set-chevron{font-size:20px;color:var(--set-ink2)}
+html[data-theme="glass"] .set-chevron{color:rgba(255,255,255,.7)}
+
+.set-card{background:var(--set-card);border-radius:20px;box-shadow:var(--set-raise);padding:16px}
+html[data-theme="glass"] .set-card{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);box-shadow:none}
+.set-card h3{margin:0 0 10px;font-size:14px;letter-spacing:.08em;text-transform:uppercase;color:var(--set-ink2)}
+html[data-theme="glass"] .set-card h3{color:rgba(255,255,255,.75)}
+
+.set-seg{display:flex;gap:6px;background:var(--set-bg);border-radius:999px;padding:5px;box-shadow:var(--set-inset)}
+html[data-theme="glass"] .set-seg{background:rgba(0,0,0,.3);box-shadow:none}
+.set-seg button{flex:1;border:0;background:transparent;color:var(--set-ink);font:inherit;font-size:14px;
+  padding:9px 6px;border-radius:999px;cursor:pointer}
+html[data-theme="glass"] .set-seg button{color:#f5f5f5}
+.set-seg button.selected{background:var(--set-accent);color:var(--set-on-accent);font-weight:700}
+html[data-theme="glass"] .set-seg button.selected{background:rgba(255,255,255,.88);color:#111}
+
+.set-choice{display:flex;align-items:center;gap:12px;width:100%;text-align:left;padding:12px 10px;border:0;
+  background:transparent;color:var(--set-ink);font:inherit;font-size:15px;cursor:pointer;border-radius:12px}
+html[data-theme="glass"] .set-choice{color:#f5f5f5}
+.set-choice .dot{display:grid;place-items:center;flex:0 0 20px;width:20px;height:20px;border-radius:50%;
+  border:2px solid var(--set-ink2)}
+.set-choice.selected .dot{border-color:var(--set-accent)}
+.set-choice.selected .dot::after{content:"";width:10px;height:10px;border-radius:50%;background:var(--set-accent)}
+html[data-theme="glass"] .set-choice.selected .dot{border-color:#fff}
+html[data-theme="glass"] .set-choice.selected .dot::after{background:#fff}
+.set-swatch{flex:0 0 44px;width:44px;height:44px;border-radius:12px;box-shadow:var(--set-inset);background:#eee center/cover}
+
+.set-toggle-row{display:flex;align-items:center;gap:12px;padding:12px 10px;color:var(--set-ink);font-size:15px}
+html[data-theme="glass"] .set-toggle-row{color:#f5f5f5}
+.set-toggle-row .set-label{flex:1}
+.set-switch{position:relative;flex:0 0 52px;width:52px;height:30px;border-radius:999px;background:var(--set-bg);
+  box-shadow:var(--set-inset);border:0;cursor:pointer}
+html[data-theme="glass"] .set-switch{background:rgba(0,0,0,.35);box-shadow:none}
+.set-switch::after{content:"";position:absolute;top:4px;left:4px;width:22px;height:22px;border-radius:50%;
+  background:var(--set-card);box-shadow:var(--set-raise-s);transition:left .15s ease}
+html[data-theme="glass"] .set-switch::after{background:#eee;box-shadow:none}
+.set-switch.on{background:var(--set-accent)}
+.set-switch.on::after{left:26px}
+html[data-theme="glass"] .set-switch.on{background:rgba(255,255,255,.85)}
+html[data-theme="glass"] .set-switch.on::after{background:#111}
+
+.dl-row{display:flex;align-items:center;gap:12px;padding:12px 4px;border-bottom:1px solid var(--set-line)}
+.dl-row:last-child{border-bottom:0}
+.dl-icon{display:grid;place-items:center;flex:0 0 40px;width:40px;height:40px;border-radius:12px;
+  box-shadow:var(--set-inset);font-weight:800;color:var(--set-accent)}
+html[data-theme="glass"] .dl-icon{box-shadow:none;background:rgba(255,255,255,.14);color:#fff}
+.dl-name{flex:1;min-width:0;font-size:15px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.dl-name small{display:block;font-size:12px;color:var(--set-ink2)}
+html[data-theme="glass"] .dl-name small{color:rgba(255,255,255,.75)}
+.dl-clear{margin-top:6px;border:0;border-radius:12px;padding:10px 14px;font:inherit;font-size:14px;cursor:pointer;
+  background:var(--set-card);color:var(--set-accent);box-shadow:var(--set-raise-s)}
+html[data-theme="glass"] .dl-clear{background:rgba(255,255,255,.12);color:#fff;box-shadow:none}
+
+.about-mark{display:grid;place-items:center;width:72px;height:72px;margin:6px auto 12px;border-radius:20px;
+  background:var(--set-accent);color:var(--set-on-accent);font-size:38px;font-weight:800;box-shadow:var(--set-raise-s)}
+.about-name{text-align:center;font-size:20px;font-weight:800;margin:0}
+.about-tag{text-align:center;font-size:13px;color:var(--set-ink2);margin:4px 0 14px}
+html[data-theme="glass"] .about-tag{color:rgba(255,255,255,.75)}
+.about-kv{display:flex;justify-content:space-between;gap:12px;padding:10px 4px;border-bottom:1px solid var(--set-line);font-size:15px}
+.about-kv:last-child{border-bottom:0}
+.about-kv span:first-child{color:var(--set-ink2)}
+html[data-theme="glass"] .about-kv span:first-child{color:rgba(255,255,255,.75)}
+.about-kv a{color:var(--set-accent)}
+html[data-theme="glass"] .about-kv a{color:#fff}
+
+
+/* ---- background painting fix: body background must not cover its own ::before wallpaper ---- */
+html[data-bg="car"] body,html[data-bg="gradient"] body,html[data-theme="glass"] body{background:transparent!important}
+
+/* ---- keep the A logo mark in the glass (old) theme ---- */
+html[data-theme="glass"] .brand-mark,html[data-theme="default"] .brand-mark{font-size:0!important;color:transparent!important;overflow:hidden;border-radius:12px!important;background:#000 url(data:image/png;base64,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) center/cover no-repeat!important}
+
+
+/* ---- readability over photo/gradient backgrounds (cream theme only) ---- */
+html[data-theme="cream"][data-bg="car"] body::after,
+html[data-theme="cream"][data-bg="gradient"] body::after{
+  display:block!important;content:""!important;position:fixed;inset:0;z-index:-1;
+  background:rgba(246,239,223,.55)}
+html[data-theme="cream"][data-mode="dark"][data-bg="car"] body::after,
+html[data-theme="cream"][data-mode="dark"][data-bg="gradient"] body::after{
+  background:rgba(22,18,12,.66)}
+html[data-theme="cream"][data-bg="car"],html[data-theme="cream"][data-bg="gradient"]{
+  --raise:6px 6px 16px rgba(60,40,20,.35),-6px -6px 16px rgba(255,255,250,.28);
+  --raise-s:4px 4px 10px rgba(60,40,20,.32),-4px -4px 10px rgba(255,255,250,.26);
+  --inset:inset 3px 3px 7px rgba(60,40,20,.28),inset -3px -3px 7px rgba(255,255,250,.55)}
+html[data-theme="cream"][data-mode="dark"][data-bg="car"],html[data-theme="cream"][data-mode="dark"][data-bg="gradient"]{
+  --raise:6px 6px 16px rgba(0,0,0,.55),-6px -6px 16px rgba(255,240,210,.06);
+  --raise-s:4px 4px 10px rgba(0,0,0,.5),-4px -4px 10px rgba(255,240,210,.05);
+  --inset:inset 3px 3px 7px rgba(0,0,0,.5),inset -3px -3px 7px rgba(255,240,210,.05)}
+
+
+/* ---- remove the Catalogue Connected card (Akarsh, 2026-11-28) ---- */
+#status{display:none!important}
+
+/* ---- Default theme (store look from Akarsh's Play Store photo) ---- */
+html[data-theme="default"]{--set-bg:#121212;--set-card:#1e1f20;--set-ink:#e3e3e3;--set-ink2:#9aa0a6;
+  --set-accent:#a8c7fa;--set-on-accent:#062e6f;--set-line:rgba(255,255,255,.1);
+  --set-raise:none;--set-raise-s:none;--set-inset:none}
+html[data-theme="default"] body{background:#121212!important;color:#e3e3e3!important}
+html[data-theme="default"] body,html[data-theme="default"] button,html[data-theme="default"] input,
+html[data-theme="default"] select,html[data-theme="default"] textarea,html[data-theme="default"] .settings-screen{
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif!important}
+html[data-theme="default"] .topbar{background:#121212!important;border:0!important;border-bottom:1px solid #26272a!important;
+  box-shadow:none!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+html[data-theme="default"] .app-card,html[data-theme="default"] .panel,html[data-theme="default"] .status,
+html[data-theme="default"] .app-details-hero,html[data-theme="default"] .app-details-section,
+html[data-theme="default"] .app-details-stat{
+  background:#1e1f20!important;border:1px solid rgba(255,255,255,.05)!important;border-radius:24px!important;
+  box-shadow:none!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+html[data-theme="default"] .search{background:#1e1f20!important;border:1px solid rgba(255,255,255,.05)!important;
+  border-radius:999px!important;box-shadow:none!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+html[data-theme="default"] .search input{background:transparent!important;color:#e3e3e3!important}
+html[data-theme="default"] .search input::placeholder{color:#9aa0a6!important;opacity:1}
+html[data-theme="default"] .search>span::after{color:#a8c7fa!important}
+html[data-theme="default"] .chip,html[data-theme="default"] .load-more-row .chip,html[data-theme="default"] button.secondary{
+  background:#26272a!important;border:0!important;border-radius:14px!important;box-shadow:none!important;
+  color:#e3e3e3!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+html[data-theme="default"] .chip.selected{background:#c2e7ff!important;color:#001d35!important}
+html[data-theme="default"] .admin-link{background:#26272a!important;border:0!important;border-radius:14px!important;
+  box-shadow:none!important;color:#e3e3e3!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+html[data-theme="default"] .app-icon,html[data-theme="default"] .status-icon{
+  background:#26272a!important;border-radius:16px!important;box-shadow:none!important;border:0!important;color:#a8c7fa!important}
+html[data-theme="default"] .tag,html[data-theme="default"] .section-head #count{
+  background:#26272a!important;color:#a8c7fa!important;border:0!important;box-shadow:none!important}
+html[data-theme="default"] .brand,html[data-theme="default"] .intro h1,html[data-theme="default"] .section-head h2,
+html[data-theme="default"] .app-card h3,html[data-theme="default"] .status-text strong{color:#e3e3e3!important;text-shadow:none!important}
+html[data-theme="default"] .eyebrow{color:#9aa0a6!important}
+html[data-theme="default"] .app-card p,html[data-theme="default"] .app-card .meta,html[data-theme="default"] .intro>p:not(.eyebrow),
+html[data-theme="default"] .status-text small,html[data-theme="default"] .search-info,html[data-theme="default"] .section-head span,
+html[data-theme="default"] footer,html[data-theme="default"] .load-count{color:#9aa0a6!important;text-shadow:none!important}
+html[data-theme="default"] .primary,html[data-theme="default"] .app-details-download{
+  background:#c2e7ff!important;color:#001d35!important;border:0!important;border-radius:999px!important;box-shadow:none!important}
+html[data-theme="default"] .app-details-screen{background:#121212!important}
+html[data-theme="default"] .app-details-top{background:#121212!important;border-bottom:1px solid #26272a!important;
+  backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+html[data-theme="default"] .app-details-back{background:#26272a!important;border:0!important;color:#e3e3e3!important}
+html[data-theme="default"] .app-details-screen *{color:#e3e3e3}
+html[data-theme="default"] .app-details-screen .app-details-download{color:#001d35!important}
+html[data-theme="default"] input,html[data-theme="default"] select,html[data-theme="default"] textarea{
+  background:#1e1f20!important;border:1px solid rgba(255,255,255,.08)!important;box-shadow:none!important;color:#e3e3e3!important}
+html[data-theme="default"] footer{border-top-color:#26272a!important}
+html[data-theme="default"] .set-icon{background:#26272a;box-shadow:none;color:#a8c7fa}
+html[data-theme="default"] .dl-icon{background:#26272a;box-shadow:none;color:#a8c7fa}
+html[data-theme="default"] .set-switch{background:#0a0a0b;box-shadow:none}
+html[data-theme="default"] .set-switch::after{background:#e3e3e3;box-shadow:none}
+html[data-theme="default"] .set-switch.on{background:#c2e7ff}
+html[data-theme="default"] .set-switch.on::after{background:#001d35}
+html[data-theme="default"] .set-seg{background:#0a0a0b;box-shadow:none}
+html[data-theme="default"] .set-seg button.selected{background:#c2e7ff;color:#001d35}
+html[data-theme="default"] .set-swatch{box-shadow:none}
+html[data-theme="default"] .dl-clear{background:#26272a;box-shadow:none;color:#a8c7fa}
+
+/* liquid glass on the Default theme */
+html[data-theme="default"][data-glass="on"] .app-card,html[data-theme="default"][data-glass="on"] .panel,
+html[data-theme="default"][data-glass="on"] .chip:not(.selected),html[data-theme="default"][data-glass="on"] .search,
+html[data-theme="default"][data-glass="on"] .topbar,html[data-theme="default"][data-glass="on"] .admin-link{
+  background:rgba(30,31,32,.55)!important;backdrop-filter:blur(14px)!important;-webkit-backdrop-filter:blur(14px)!important;
+  border:1px solid rgba(255,255,255,.1)!important}
+
+/* readable scrim over wallpapers on the Default theme */
+html[data-theme="default"][data-bg="car"] body::after,html[data-theme="default"][data-bg="gradient"] body::after{
+  display:block!important;content:""!important;position:fixed;inset:0;z-index:-1;background:rgba(8,8,10,.5)}
+
+/* ---- download-to-device pills in Appearances ---- */
+.set-dl{flex:0 0 auto;display:inline-block;border-radius:999px;padding:7px 14px;font-size:13px;font-weight:700;
+  background:var(--set-accent);color:var(--set-on-accent)}
+html[data-theme="default"] .set-dl{background:#c2e7ff;color:#001d35}
+html[data-theme="glass"] .set-dl{background:rgba(255,255,255,.88);color:#111}
+.set-choice .set-dl{margin-right:4px}
+
+
+/* ---- fixes: search input border + wallpaper visibility on Default theme (must stay last) ---- */
+html[data-theme="default"] .search input{border:0!important;box-shadow:none!important}
+html[data-bg="car"] body,html[data-bg="gradient"] body,html[data-theme="glass"] body{background:transparent!important}
+
+/* ---- download failure / retry state ---- */
+.set-dl.retry{background:#3d0006!important;color:#ffb4ab!important;border:1px solid #ffb4ab}
+html[data-theme="cream"] .set-dl.retry{background:#f8e3e0!important;color:#8c1d18!important;border:1px solid #d88f88}
+.set-choice:disabled{opacity:.75}
+
+/* ---- download icon inside Get pills and settings rows ---- */
+.set-dl{display:inline-flex;align-items:center;gap:6px}
+.set-dl svg{width:15px;height:15px;flex:0 0 auto}
+.set-icon svg{width:21px;height:21px;display:block}
+
+/* ---- custom wallpaper added from the device ---- */
+html[data-bg="custom"] body::before{
+  display:block!important;content:""!important;position:fixed;inset:0;z-index:-1;
+  background-position:center;background-size:cover;background-repeat:no-repeat;transform:translateZ(0)}
+html[data-bg="custom"] body{background:transparent!important}
+html[data-theme="default"][data-bg="custom"] body::after{
+  display:block!important;content:""!important;position:fixed;inset:0;z-index:-1;background:rgba(8,8,10,.5)}
+html[data-theme="cream"][data-bg="custom"] body::after{
+  display:block!important;content:""!important;position:fixed;inset:0;z-index:-1;background:rgba(246,239,223,.55)}
+html[data-theme="cream"][data-mode="dark"][data-bg="custom"] body::after{background:rgba(22,18,12,.66)}
+html[data-theme="cream"][data-bg="custom"]{
+  --raise:6px 6px 16px rgba(60,40,20,.35),-6px -6px 16px rgba(255,255,250,.28);
+  --raise-s:4px 4px 10px rgba(60,40,20,.32),-4px -4px 10px rgba(255,255,250,.26);
+  --inset:inset 3px 3px 7px rgba(60,40,20,.28),inset -3px -3px 7px rgba(255,255,250,.55)}
+html[data-theme="cream"][data-mode="dark"][data-bg="custom"]{
+  --raise:6px 6px 16px rgba(0,0,0,.55),-6px -6px 16px rgba(255,240,210,.06);
+  --raise-s:4px 4px 10px rgba(0,0,0,.5),-4px -4px 10px rgba(255,240,210,.05);
+  --inset:inset 3px 3px 7px rgba(0,0,0,.5),inset -3px -3px 7px rgba(255,240,210,.05)}
+
+/* ---- Add wallpaper row ---- */
+.set-add{margin-top:2px}
+.set-add-plus{flex:0 0 auto;width:34px;height:34px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;
+  font-size:20px;font-weight:700;border:1.6px dashed currentColor;opacity:.85}
+
+/* ---- icon-only download button + downloading spinner ---- */
+.set-dl-icon{padding:8px 12px}
+.set-spin{width:14px;height:14px;border-radius:50%;border:2.2px solid currentColor;
+  border-top-color:transparent;animation:set-spin .7s linear infinite;display:inline-block}
+@keyframes set-spin{to{transform:rotate(360deg)}}
