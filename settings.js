@@ -57,7 +57,9 @@
   function loadPrefs() {
     try {
       const saved = JSON.parse(localStorage.getItem(LS_SETTINGS) || "{}");
-      return Object.assign({}, DEFAULTS, saved);
+      const p = Object.assign({}, DEFAULTS, saved);
+      if (p.theme === "glass") { p.theme = "default"; if (p.background === "car") p.background = "plain"; }
+      return p;
     } catch (_) { return Object.assign({}, DEFAULTS); }
   }
   function savePrefs(p) {
@@ -326,7 +328,6 @@
       const themes = [
         ["default", "Default", "Store look · from your photo"],
         ["cream", "Cream", "Soft raised look"],
-        ["glass", "Glass", "Frosted look · last theme"],
       ];
       /* Preset wallpaper rows removed at his request - the section is
          just Add, plus "My wallpaper" once a photo is on the device. */
@@ -364,7 +365,7 @@
         '</div><p class="settings-note" style="margin:8px 2px 0">Mode applies to the Default theme. Cream always stays light cream.</p></div>' +
         '<div class="set-card"><h3>Theme</h3>' +
         themes.map(themeRow).join("") +
-        '<p class="settings-note" style="margin:8px 2px 0">Themes download to this device and bring their own wallpaper - picking one replaces the current wallpaper.</p></div>' +
+        '</div>' +
         '<div class="set-card"><h3>Liquid glass</h3>' +
         '<div class="set-toggle-row"><span class="set-label">Liquid glass<small>Clear glossy cards</small></span>' +
         '<button type="button" class="set-switch' + (prefs.glass ? " on" : "") + '" data-glass-toggle aria-label="Toggle liquid glass"></button></div></div>' +
