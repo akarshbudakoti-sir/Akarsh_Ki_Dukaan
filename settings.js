@@ -1,5 +1,5 @@
 /* ModStore Settings (demo): gear in topbar, settings overlay with
-   Admin, Downloads, Appearances, Request an Update, About.
+   Admin, Downloads, Appearances, Request an App Update, About.
    Themes and wallpapers are downloaded onto the device before use:
    their actual bytes are stored in the browser's durable Cache Storage,
    and an item counts as downloaded only after its bytes verify there. */
@@ -8,7 +8,7 @@
   const LS_DOWNLOADS = "modstore-download-clicks";
   const LS_OWNED = "modstore-downloaded";
   const WHATSAPP_URL = "https://wa.me/919457114580?text=" +
-    encodeURIComponent("Bro, please update ModStore!");
+    encodeURIComponent("Please Update ModStore!\nApp Name - ");
   const DEFAULTS = { mode: "system", theme: "default", glass: false, background: "plain" };
 
   /* Which file each downloadable item saves on the device.
@@ -161,7 +161,7 @@
     const wallpaper = document.querySelector('link[href^="wallpaper.css"]');
     if (wallpaper) wallpaper.disabled = prefs.theme !== "cream";
     root.dataset.theme = prefs.theme;
-    root.dataset.mode = prefs.theme === "cream" ? resolvedMode() : "dark";
+    root.dataset.mode = (prefs.theme === "cream" || prefs.theme === "default") ? resolvedMode() : "dark";
     root.dataset.glass = prefs.glass ? "on" : "off";
     root.dataset.bg = prefs.theme === "glass" ? "car" : prefs.background;
     if (prefs.theme === "glass") {
@@ -261,11 +261,11 @@
 
   /* ---------- views ---------- */
   const ROWS = [
-    { id: "admin",    icon: "🛠", label: "Admin",            sub: "Manage apps and categories" },
+    { id: "admin",    icon: '<span class="set-icon-admin"></span>', label: "Admin",            sub: "Manage apps and categories" },
     { id: "downloads",icon: DL_ICON, label: "Downloads",     sub: "Apps you tapped Download on" },
     { id: "appear",   icon: "◐",  label: "Appearances",      sub: "Mode, theme, glass, wallpaper" },
-    { id: "update",   icon: "✆",  label: "Request an Update",sub: "Message Akarsh on WhatsApp" },
-    { id: "about",    icon: "A",  label: "About",            sub: "Version and developer" },
+    { id: "update",   icon: "✆",  label: "Request an App Update",sub: "Message Akarsh on WhatsApp" },
+    { id: "about",    icon: '<span class="set-icon-about"></span>', label: "About",            sub: "Version and developer" },
   ];
 
   function topbar(title, backLabel) {
@@ -360,15 +360,20 @@
         '<div class="set-card"><h3>Mode</h3><div class="set-seg" data-seg="mode">' +
         modes.map(m => '<button type="button" data-value="' + m[0] + '"' +
           (prefs.mode === m[0] ? ' class="selected"' : '') + '>' + m[1] + '</button>').join("") +
-        '</div><p class="settings-note" style="margin:8px 2px 0">Mode applies to the Cream theme.</p></div>' +
+        '</div><p class="settings-note" style="margin:8px 2px 0">Mode applies to the Default and Cream themes.</p></div>' +
         '<div class="set-card"><h3>Theme</h3>' +
         themes.map(themeRow).join("") +
         '<p class="settings-note" style="margin:8px 2px 0">Themes download to this device and bring their own wallpaper - picking one replaces the current wallpaper.</p></div>' +
         '<div class="set-card"><h3>Liquid glass</h3>' +
-        '<div class="set-toggle-row"><span class="set-label">Liquid glass<small>Frosted see-through cards</small></span>' +
+        '<div class="set-toggle-row"><span class="set-label">Liquid glass<small>Clear glossy cards</small></span>' +
         '<button type="button" class="set-switch' + (prefs.glass ? " on" : "") + '" data-glass-toggle aria-label="Toggle liquid glass"></button></div></div>' +
         '<div class="set-card"><h3>Wallpaper</h3>' +
         bgs.map(bgRow).join("") +
+        ((owned.wallpapers.includes("custom") && prefs.background === "custom") ?
+          '<div class="set-bg-actions">' +
+          '<button type="button" class="set-bg-action" data-bg-change>Change</button>' +
+          '<button type="button" class="set-bg-action danger" data-bg-remove>Remove</button>' +
+          '</div>' : '') +
         '<button type="button" class="set-choice set-add" data-bg-add>' +
         '<span class="set-add-plus">' + (failed.has("bg:add") ? "!" : "+") + '</span>' +
         '<span class="set-label">Add<small>' +
@@ -450,6 +455,20 @@
         });
       }
 
+      const changeBtn = el.querySelector("[data-bg-change]");
+      if (changeBtn && fileInput) changeBtn.addEventListener("click", () => fileInput.click());
+      const removeBtn = el.querySelector("[data-bg-remove]");
+      if (removeBtn) removeBtn.addEventListener("click", () => {
+        removeBtn.disabled = true;
+        openStore().then(c => c.delete(CUSTOM_BG_URL)).catch(() => {}).then(() => {
+          const i = owned.wallpapers.indexOf("custom");
+          if (i >= 0) owned.wallpapers.splice(i, 1);
+          saveOwned(owned);
+          if (prefs.background === "custom") prefs.background = "plain";
+          savePrefs(prefs); applyPrefs(); renderView();
+        });
+      });
+
       const toggle = el.querySelector("[data-glass-toggle]");
       if (toggle) toggle.addEventListener("click", () => {
         prefs.glass = !prefs.glass; savePrefs(prefs); applyPrefs(); renderView();
@@ -485,7 +504,17 @@
     const btn = document.getElementById("settingsButton");
     if (btn) btn.addEventListener("click", openSettings);
   }
+  /* Reopen Settings when arriving from a "‹ Settings" link (admin) or when
+     the history entry belonged to an open Settings screen (Back from admin). */
+  function openFromNav() {
+    let want = false;
+    try { if (location.hash === "#settings") want = true; } catch (_) {}
+    try { if (history.state && history.state.k === "settings") want = true; } catch (_) {}
+    if (!want) return;
+    try { history.replaceState({ k: "home" }, "", location.pathname + location.search); } catch (_) {}
+    openSettings();
+  }
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", wireButton);
-  } else { wireButton(); }
+    document.addEventListener("DOMContentLoaded", () => { wireButton(); openFromNav(); });
+  } else { wireButton(); openFromNav(); }
 })();
