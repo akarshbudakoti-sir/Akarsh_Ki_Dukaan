@@ -340,3 +340,13 @@ html[data-theme="cream"][data-mode="dark"][data-bg="custom"]{
 .set-spin{width:14px;height:14px;border-radius:50%;border:2.2px solid currentColor;
   border-top-color:transparent;animation:set-spin .7s linear infinite;display:inline-block}
 @keyframes set-spin{to{transform:rotate(360deg)}}
+
+/* ---- settings overlay on the Glass theme: solid dark surface, light text ---- */
+html[data-theme="glass"]{
+  --set-bg:#141518;--set-card:rgba(255,255,255,.07);--set-ink:#f5f5f5;--set-ink2:rgba(255,255,255,.62);
+  --set-accent:#e8e8ec;--set-on-accent:#17181c;--set-line:rgba(255,255,255,.16);
+  --set-raise:none;--set-raise-s:none;--set-inset:none}
+html[data-theme="glass"] .settings-screen,
+html[data-theme="glass"] .settings-top{background:#141518!important}
+html[data-theme="glass"] .set-seg{background:rgba(255,255,255,.06);box-shadow:none}
+html[data-theme="glass"] .set-switch{background:rgba(255,255,255,.1)}
