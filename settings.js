@@ -161,7 +161,8 @@
     const wallpaper = document.querySelector('link[href^="wallpaper.css"]');
     if (wallpaper) wallpaper.disabled = prefs.theme !== "cream";
     root.dataset.theme = prefs.theme;
-    root.dataset.mode = (prefs.theme === "cream" || prefs.theme === "default") ? resolvedMode() : "dark";
+    /* Cream stays light cream every time; the mode choice applies to the Default theme only (Akarsh, 2026-11-28). */
+    root.dataset.mode = prefs.theme === "default" ? resolvedMode() : (prefs.theme === "cream" ? "light" : "dark");
     root.dataset.glass = prefs.glass ? "on" : "off";
     root.dataset.bg = prefs.theme === "glass" ? "car" : prefs.background;
     if (prefs.theme === "glass") {
@@ -360,7 +361,7 @@
         '<div class="set-card"><h3>Mode</h3><div class="set-seg" data-seg="mode">' +
         modes.map(m => '<button type="button" data-value="' + m[0] + '"' +
           (prefs.mode === m[0] ? ' class="selected"' : '') + '>' + m[1] + '</button>').join("") +
-        '</div><p class="settings-note" style="margin:8px 2px 0">Mode applies to the Default and Cream themes.</p></div>' +
+        '</div><p class="settings-note" style="margin:8px 2px 0">Mode applies to the Default theme. Cream always stays light cream.</p></div>' +
         '<div class="set-card"><h3>Theme</h3>' +
         themes.map(themeRow).join("") +
         '<p class="settings-note" style="margin:8px 2px 0">Themes download to this device and bring their own wallpaper - picking one replaces the current wallpaper.</p></div>' +
@@ -519,3 +520,4 @@
     document.addEventListener("DOMContentLoaded", () => { wireButton(); openFromNav(); });
   } else { wireButton(); openFromNav(); }
 })();
+
